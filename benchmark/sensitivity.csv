@@ -1,0 +1,19 @@
+scenario,track,target,PLSR_detection_limit_pct,n_components,rmsecv,r2cv
+calibrated default,dry,seacoal,0.5,2,0.2503,0.9454
+calibrated default,moist,seacoal,0.5,6,0.2737,0.9462
+"calibrated default, water path factor 4",moist,seacoal,0.5,6,0.2286,0.9544
+calibrated default,dry,iron_oxide,0.1,4,0.0939,0.9553
+calibrated default,moist,iron_oxide,0.1,6,0.0955,0.955
+"calibrated default, water path factor 4",moist,iron_oxide,0.15,7,0.0989,0.9488
+USGS priors (no lab calibration),dry,seacoal,0.3,4,0.2371,0.956
+USGS priors (no lab calibration),dry,iron_oxide,0.15,4,0.0981,0.9527
+linear mixing,dry,seacoal,4.0,2,0.8123,0.4934
+linear mixing,dry,iron_oxide,1.0,4,0.2196,0.7574
+seacoal = carbon black,dry,seacoal,0.3,4,0.2479,0.9452
+seacoal = carbon black,dry,iron_oxide,0.1,4,0.1112,0.9423
+clay = calcium montmorillonite SAz-1,dry,seacoal,0.3,4,0.2587,0.9435
+clay = calcium montmorillonite SAz-1,dry,iron_oxide,0.15,5,0.1158,0.9444
+clay grain 30 um,dry,seacoal,0.5,5,0.207,0.9651
+clay grain 30 um,dry,iron_oxide,0.1,4,0.0945,0.9621
+instrument FWHM 25 nm,dry,seacoal,0.5,4,0.2773,0.9387
+instrument FWHM 25 nm,dry,iron_oxide,0.1,4,0.0983,0.9485

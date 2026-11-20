@@ -1,0 +1,52 @@
+GREEN SAND NIR REFERENCE LIBRARY: QA REPORT
+Plain-language summary: counts, range checks, physical-direction checks and the
+model check against a measured USGS mixture. Every PASS/FAIL below is computed.
+
+[0] Effective grain sizes used (um): silica_sand 250.0, clay 10.0, seacoal 37.7, iron_oxide 2.48
+    seacoal and iron oxide sizes calibrated to 24 measured lab AUC values (RMSE 36.7 AUC units; lab AUC range [102.4, 524.6])
+
+[1] Mixing model check: USGS measured 2% hematite + 98% quartz (GDS76), hematite GDS27
+    hematite size fitted for this check only: 8.8 um (ratio to quartz 0.22)
+    RMSE 1000-2350 nm: Hapke 0.0112  vs linear 0.0222
+    reflectance at 1000 nm: measured 0.776, Hapke 0.803, linear 0.881
+    PASS: Hapke closer to measurement than linear
+
+[2] Row counts
+    dry library v1.0: 4410 recipes x 1351 native channels; 195 instrument channels
+    moisture extension: 6930 recipes x 1351 native channels
+
+[3] Range checks
+    PASS: dry library all reflectance finite and within (0,1): min 0.2688, max 0.7353
+    PASS: moisture extension all reflectance finite and within (0,1): min 0.2631, max 0.7324
+
+[4] Physical-direction checks (more absorber should darken the sample)
+    PASS: more seacoal lowers mean reflectance in 100.0% of 4200 steps
+    PASS: more iron oxide lowers 1000-1020 nm reflectance (Fe3+ band edge) in 100.0% of 4200 steps
+    NOTE: over the full 1000-2350 nm range, more iron oxide lowers mean reflectance in 91.4% of steps
+          (not 100%: in the darkest, high-seacoal recipes the mixture is already darker than the iron oxide itself, so adding it lightens the average)
+    PASS: more moisture lowers mean reflectance in 100.0% of 5940 steps
+
+[5] Water band at 1940 nm, reference recipe 8% clay, 3% seacoal, 0.5% iron oxide
+    dry: R1940 = 0.4303
+    moisture 2.0%: R1940 = 0.4150
+    moisture 2.5%: R1940 = 0.4113
+    moisture 3.0%: R1940 = 0.4076
+    moisture 3.5%: R1940 = 0.4039
+    moisture 4.0%: R1940 = 0.4002
+    moisture 4.5%: R1940 = 0.3966
+    moisture 5.0%: R1940 = 0.3930
+
+[6] Spot rows (dry library, native 1 nm; columns R_1100, R_1700, R_2200)
+    GSNIR-v1.0-00000: clay 3%, seacoal 0%, iron oxide 0% -> 0.65978, 0.69483, 0.58801
+    GSNIR-v1.0-03969: clay 12%, seacoal 0%, iron oxide 0% -> 0.70504, 0.73533, 0.55328
+    GSNIR-v1.0-02462: clay 8%, seacoal 3%, iron oxide 0.5% -> 0.45733, 0.47784, 0.42117
+    GSNIR-v1.0-02645: clay 8%, seacoal 5%, iron oxide 2% -> 0.37614, 0.40784, 0.37970
+    GSNIR-v1.0-00440: clay 3%, seacoal 5%, iron oxide 2% -> 0.30912, 0.34202, 0.33796
+
+[7] Endmember values at 1700 nm (check against the USGS source files)
+    silica_sand: s07_ASD_Quartz_GDS74_Sand_Ottawa_BECKc_AREF.txt -> 0.64859
+    clay: s07_ASD_Montmorillonite_SWy-1_BECKb_AREF.txt -> 0.76638
+    seacoal: s07_ASD_Kerogen_BK-Cornell_BECKa_AREF.txt -> 0.03941
+    iron_oxide: s07_ASD_Hematite_GDS69.g_lt10um_BECKb_AREF.txt -> 0.39249
+
+[8] Cross-section shares for 88.5/8/3/0.5 sand/clay/seacoal/iron oxide: silica_sand 0.233, clay 0.594, seacoal 0.107, iron_oxide 0.067

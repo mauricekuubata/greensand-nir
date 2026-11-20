@@ -1,0 +1,177 @@
+{
+  "_about": "Mixing rules for the Green Sand NIR Reference Library. Maurice Kuubata sets every value in this file; the pipeline only reads it. Change a value here and re-run the pipeline to rebuild everything. Densities in g/cm3, effective grain diameters in micrometres. Values marked provisional in 'status' are awaiting the author's ruling (see docs/VERIFY_CHECKLIST.md Part 4).",
+  "version": "1.0.0",
+  "wavelength_file": "s07_ASD_Wavelengths_ASD_0.35-2.5_microns_2151_ch.txt",
+  "bandpass_file": "s07_ASD_Bandpass_(FWHM)_ASDFR_StandardResolution.txt",
+  "native_range_nm": [
+    1000,
+    2350
+  ],
+  "composition_basis": "clay, seacoal and iron oxide are mass percent of the dry mixture; silica sand is the balance; moisture is mass percent of the wet mixture",
+  "mixing_model": "hapke_diffusive",
+  "mixing_model_alternatives": [
+    "linear",
+    "absorbance_linear"
+  ],
+  "components": {
+    "silica_sand": {
+      "spectrum": "s07_ASD_Quartz_GDS74_Sand_Ottawa_BECKc_AREF.txt",
+      "label": "Quartz GDS74 Sand Ottawa",
+      "density": 2.65,
+      "grain_um": 250,
+      "status": "provisional: grain size assumes AFS GFN about 50-60 silica sand"
+    },
+    "clay": {
+      "spectrum": "s07_ASD_Montmorillonite_SWy-1_BECKb_AREF.txt",
+      "label": "Montmorillonite SWy-1 (Wyoming sodium bentonite reference clay)",
+      "alternatives": {
+        "calcium_bentonite": "s07_ASD_Montmorillonite_SAz-1_BECKb_AREF.txt"
+      },
+      "density": 2.35,
+      "grain_um": 10,
+      "status": "provisional: 10 um treats bentonite as aggregates, not single platelets"
+    },
+    "seacoal": {
+      "spectrum": "s07_ASD_Kerogen_BK-Cornell_BECKa_AREF.txt",
+      "label": "Kerogen BK-Cornell (proxy for bituminous seacoal)",
+      "alternatives": {
+        "carbon_black": "s07_ASD_Carbon_Black_GDS68_ASDFRa_AREF.txt"
+      },
+      "density": 1.3,
+      "grain_um": "lab_fit",
+      "status": "provisional: splib07 contains no coal; kerogen is the closest organic analog. Effective size calibrated to the Kuubata (2025) measured AUC values",
+      "grain_um_fallback": 75
+    },
+    "iron_oxide": {
+      "spectrum": "s07_ASD_Hematite_GDS69.g_lt10um_BECKb_AREF.txt",
+      "label": "Hematite GDS69 <10 um fraction (proxy for red iron oxide)",
+      "alternatives": {
+        "hematite_GDS27_bright": "s07_ASD_Hematite_GDS27_BECKa_AREF.txt",
+        "hematite_FE2602": "s07_ASD_Hematite_FE2602_BECKb_AREF.txt"
+      },
+      "density": 5.26,
+      "grain_um": "lab_fit",
+      "grain_um_fallback": 5,
+      "status": "provisional: GDS27 (bright synthetic hematite) cannot reproduce the measured positive AUC at any size, so the darker fine natural hematite GDS69 <10 um is used; effective size calibrated to Kuubata (2025) AUC values"
+    }
+  },
+  "water": {
+    "optical_constants": "water_nk_Segelstein1981.yml",
+    "model": "uniform film on all grain surfaces; each grain's single-scattering albedo multiplied by exp(-2 * alpha * film_thickness * path_factor)",
+    "path_factor": 1.0,
+    "status": "provisional: path_factor 1.0 is the pure geometric estimate, no calibration to measured moist green sand"
+  },
+  "validation_spectra": {
+    "hematite_quartz_mix": "s07_ASD_Hematite.02+Quartz.98_GDS76_BECKa_AREF.txt",
+    "quartz_fine": "s07_ASD_Quartz_GDS31_0-74um_fr_BECKa_AREF.txt",
+    "beach_sand_dry": "s07_ASD_Sand_DWO-3-DEL2ar1_no_oil_ASDFRa_AREF.txt",
+    "beach_sand_wet": "s07_ASD_Sand_DWO-3-DEL2ar2_wet_noOil_ASDFRa_AREF.txt",
+    "hematite_GDS27": "s07_ASD_Hematite_GDS27_BECKa_AREF.txt"
+  },
+  "instrument": {
+    "name": "Avantes AvaSpec-NIR256-2.5TEC (256-pixel InGaAs, TE-cooled) with AvaSphere-50 integrating sphere, as used in Kuubata (2025)",
+    "start_nm": 1000,
+    "stop_nm": 2350,
+    "step_nm": 6.93,
+    "fwhm_nm": 15,
+    "status": "range and pixel spacing (6.93 nm) confirmed from Kuubata (2025) Appendix D; FWHM 15 nm is provisional (depends on slit)"
+  },
+  "noise_tiers": {
+    "ideal": {
+      "snr": 10000,
+      "multiplicative_sd": 0.0,
+      "offset_sd": 0.0,
+      "slope_sd": 0.0
+    },
+    "lab": {
+      "snr": 2000,
+      "multiplicative_sd": 0.01,
+      "offset_sd": 0.002,
+      "slope_sd": 0.002
+    },
+    "plant": {
+      "snr": 500,
+      "multiplicative_sd": 0.03,
+      "offset_sd": 0.005,
+      "slope_sd": 0.005
+    }
+  },
+  "noise_snr_profile": {
+    "_about": "Relative SNR across the extended InGaAs range: weaker at both detector edges. Piecewise linear, nm -> factor.",
+    "nm": [
+      1000,
+      1100,
+      2100,
+      2250,
+      2350
+    ],
+    "factor": [
+      0.6,
+      1.0,
+      1.0,
+      0.6,
+      0.3
+    ]
+  },
+  "library_grid": {
+    "clay_pct": {
+      "start": 3,
+      "stop": 12,
+      "step": 1
+    },
+    "seacoal_pct": {
+      "start": 0,
+      "stop": 5,
+      "step": 0.25
+    },
+    "iron_oxide_pct": {
+      "start": 0,
+      "stop": 2,
+      "step": 0.1
+    }
+  },
+  "moisture_grid": {
+    "clay_pct": {
+      "start": 3,
+      "stop": 12,
+      "step": 1
+    },
+    "seacoal_pct": {
+      "start": 0,
+      "stop": 5,
+      "step": 0.5
+    },
+    "iron_oxide_pct": {
+      "start": 0,
+      "stop": 2,
+      "step": 0.25
+    },
+    "moisture_pct": {
+      "start": 2,
+      "stop": 5,
+      "step": 0.5
+    }
+  },
+  "mixing_model_check": {
+    "mixture_spectrum": "s07_ASD_Hematite.02+Quartz.98_GDS76_BECKa_AREF.txt",
+    "hematite_spectrum": "s07_ASD_Hematite_GDS27_BECKa_AREF.txt",
+    "quartz_spectrum": "s07_ASD_Quartz_GDS31_0-74um_fr_BECKa_AREF.txt",
+    "quartz_grain_um": 40,
+    "hematite_mass_fraction": 0.02,
+    "status": "independent check that Hapke mixing beats linear mixing on a measured USGS mixture; assumes GDS76 was made from GDS27 and fine quartz"
+  },
+  "lab_calibration": {
+    "data": "data/raw/lab_kuubata2025/lab_pc1_auc_transcribed.csv",
+    "fit": [
+      "seacoal",
+      "iron_oxide"
+    ],
+    "baseline_offsets": "one AUC offset per DC2 group, shared by the seacoal and red iron oxide series (they share the same 0% additive spectrum)",
+    "grid_um": {
+      "start": 1,
+      "stop": 300,
+      "n": 45
+    },
+    "status": "provisional: author to confirm the transcribed lab values and the offset treatment"
+  }
+}

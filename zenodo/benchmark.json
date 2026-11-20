@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "creators": [
+      {
+        "name": "Kuubata, Maurice",
+        "orcid": "0009-0003-3178-5971",
+        "affiliation": "Independent Researcher, Dubuque, Iowa, USA"
+      }
+    ],
+    "access_right": "open",
+    "version": "1.0.0",
+    "language": "eng",
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/mauricekuubata/greensand-nir",
+        "relation": "isSupplementTo",
+        "scheme": "url"
+      },
+      {
+        "identifier": "10.5066/F7RR1WDJ",
+        "relation": "isDerivedFrom",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "https://scholarworks.uni.edu/grp/4669",
+        "relation": "isDerivedFrom",
+        "scheme": "url"
+      }
+    ],
+    "keywords": [
+      "near-infrared spectroscopy",
+      "foundry",
+      "green sand",
+      "seacoal",
+      "iron oxide",
+      "spectral library",
+      "detection limit",
+      "chemometrics"
+    ],
+    "notes": "Claude (Anthropic) assisted with code and data handling; Maurice Kuubata set every mixing rule and verified every output.",
+    "upload_type": "dataset",
+    "license": "cc-by-4.0",
+    "title": "Green Sand NIR Detection-Limit Benchmark and Leaderboard v1.0.0",
+    "description": "<p>Twelve benchmark sets (dry and moist sand; ideal, lab and plant-floor noise; seacoal and red iron oxide) of simulated 1000-2350 nm InGaAs readings, a scoring rule (5% false alarms, 95% detection), baseline results for PCA-LDA, PLSR, SVM, random forest and gradient boosting, and a submission script.</p>"
+  },
+  "files": [
+    "benchmark",
+    "code/score_submission.py",
+    "docs/leaderboard/index.html",
+    "docs/CODEBOOK.md",
+    "README.md",
+    "LICENSE-DATA",
+    "CITATION.cff"
+  ]
+}

@@ -1,0 +1,1 @@
+2026-11-20 | lab_pc1_auc_transcribed.csv | 1824 bytes | sha256:d2e1c1def41d30e2f7def24da85d180af84444a918f1dbe3dcfb68d3fb6fdd22 | https://scholarworks.uni.edu/grp/4669 Appendix D (D2, D4) | hand-transcribed from thesis PDF images supplied by the author on 2026-11-20; author to verify

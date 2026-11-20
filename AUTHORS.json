@@ -1,0 +1,17 @@
+{
+  "_comment": "Author block. Every document, citation file, Zenodo record, manuscript author list and commit reads from here, so names appear identically everywhere.",
+  "authors": [
+    {
+      "name": "Maurice Kuubata",
+      "family": "Kuubata",
+      "given": "Maurice",
+      "orcid": "0009-0003-3178-5971",
+      "email": "kuubatamaurice@gmail.com",
+      "affiliation": "Independent Researcher, Dubuque, Iowa, USA",
+      "github": "mauricekuubata",
+      "roles": ["Conceptualization", "Methodology", "Investigation", "Validation", "Data curation", "Writing - original draft"],
+      "corresponding": true
+    }
+  ],
+  "collaborators": []
+}

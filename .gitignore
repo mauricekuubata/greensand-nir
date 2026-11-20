@@ -1,0 +1,10 @@
+data/raw/cache/
+release/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.env
+*.pem
+.venv/

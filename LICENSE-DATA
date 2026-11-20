@@ -1,0 +1,15 @@
+Data license
+
+The computed spectra, benchmark sets, leaderboard, figures and documents in this
+repository are licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/
+
+Copyright (c) 2026 Maurice Kuubata.
+
+Underlying sources, with thanks:
+- USGS Spectral Library Version 7 (Kokaly et al. 2017, https://doi.org/10.5066/F7RR1WDJ), U.S. public domain.
+  The reference spectra in data/raw/splib07_selected/ and library/endmembers_native1nm.csv are unchanged USGS data.
+- Liquid water optical constants, Segelstein (1981), via the refractiveindex.info database (CC0 1.0).
+- Laboratory values from Kuubata (2025), University of Northern Iowa, https://scholarworks.uni.edu/grp/4669 .
+
+Code is licensed separately under the MIT License (see LICENSE).

@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "creators": [
+      {
+        "name": "Kuubata, Maurice",
+        "orcid": "0009-0003-3178-5971",
+        "affiliation": "Independent Researcher, Dubuque, Iowa, USA"
+      }
+    ],
+    "access_right": "open",
+    "version": "1.0.0",
+    "language": "eng",
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/mauricekuubata/greensand-nir",
+        "relation": "isSupplementTo",
+        "scheme": "url"
+      },
+      {
+        "identifier": "10.5066/F7RR1WDJ",
+        "relation": "isDerivedFrom",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "https://scholarworks.uni.edu/grp/4669",
+        "relation": "isDerivedFrom",
+        "scheme": "url"
+      }
+    ],
+    "keywords": [
+      "near-infrared spectroscopy",
+      "foundry",
+      "green sand",
+      "seacoal",
+      "iron oxide",
+      "spectral library",
+      "detection limit",
+      "chemometrics"
+    ],
+    "notes": "Claude (Anthropic) assisted with code and data handling; Maurice Kuubata set every mixing rule and verified every output.",
+    "upload_type": "dataset",
+    "license": "cc-by-4.0",
+    "title": "Green Sand Computed-Mixture Near-Infrared Spectral Library v1.0.0",
+    "description": "<p>4,410 computed near-infrared reflectance spectra of dry foundry green sand (3-12% bentonite, 0-5% seacoal, 0-2% red iron oxide, silica sand balance), 1000-2350 nm at 1 nm and at the resolution of a 1000-2350 nm InGaAs instrument (195 channels). Computed by Hapke single-scattering-albedo mixing of USGS Spectral Library Version 7 spectra, with seacoal and iron oxide effective particle sizes calibrated to 24 measured dry mixtures (Kuubata 2025). Includes codebook, mixing rules, QA report and provenance log.</p>"
+  },
+  "files": [
+    "library/v1.0",
+    "library/endmembers_native1nm.csv",
+    "config/mixing_rules.json",
+    "docs/CODEBOOK.md",
+    "docs/MIXING_RULES.md",
+    "docs/LIMITATIONS.md",
+    "data/raw/PROVENANCE.txt",
+    "data/raw/PROVENANCE_lab.txt",
+    "data/processed/qa_report.txt",
+    "data/processed/lab_calibration.json",
+    "README.md",
+    "LICENSE-DATA",
+    "CITATION.cff"
+  ]
+}

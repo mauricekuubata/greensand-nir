@@ -1,0 +1,7 @@
+seacoal_spectrum,iron_oxide_spectrum,seacoal_um,iron_oxide_um,rmse_with_offsets,rmse_same_sizes_no_offsets,max_iron_oxide_auc
+s07_ASD_Kerogen_BK-Cornell_BECKa_AREF.txt,s07_ASD_Hematite_GDS69.g_lt10um_BECKb_AREF.txt,37.7,2.48,36.7,186.9,203.3
+s07_ASD_Kerogen_BK-Cornell_BECKa_AREF.txt,hematite_GDS27_bright,63.32,300.0,46.9,249.0,-0.1
+s07_ASD_Kerogen_BK-Cornell_BECKa_AREF.txt,hematite_FE2602,37.7,2.82,36.3,185.1,236.0
+carbon_black,s07_ASD_Hematite_GDS69.g_lt10um_BECKb_AREF.txt,42.92,2.48,36.9,187.9,203.3
+carbon_black,hematite_GDS27_bright,63.32,300.0,47.0,243.3,-0.1
+carbon_black,hematite_FE2602,42.92,2.82,36.5,186.1,236.0

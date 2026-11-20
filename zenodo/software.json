@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "creators": [
+      {
+        "name": "Kuubata, Maurice",
+        "orcid": "0009-0003-3178-5971",
+        "affiliation": "Independent Researcher, Dubuque, Iowa, USA"
+      }
+    ],
+    "access_right": "open",
+    "version": "1.0.0",
+    "language": "eng",
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/mauricekuubata/greensand-nir",
+        "relation": "isSupplementTo",
+        "scheme": "url"
+      },
+      {
+        "identifier": "10.5066/F7RR1WDJ",
+        "relation": "isDerivedFrom",
+        "scheme": "doi"
+      },
+      {
+        "identifier": "https://scholarworks.uni.edu/grp/4669",
+        "relation": "isDerivedFrom",
+        "scheme": "url"
+      }
+    ],
+    "keywords": [
+      "near-infrared spectroscopy",
+      "foundry",
+      "green sand",
+      "seacoal",
+      "iron oxide",
+      "spectral library",
+      "detection limit",
+      "chemometrics"
+    ],
+    "notes": "Claude (Anthropic) assisted with code and data handling; Maurice Kuubata set every mixing rule and verified every output.",
+    "upload_type": "software",
+    "license": "mit",
+    "title": "greensand-nir: open Python package for green sand NIR spectral mixing, preprocessing and PLSR calibration v1.0.0",
+    "description": "<p>Tested, documented Python package: Hapke and linear mixing, water film model, InGaAs instrument and noise simulation, NIR preprocessing (absorbance, SNV, MSC, Savitzky-Golay), PLSR with cross-validation, detection-limit scoring, and the full reproducible pipeline.</p>"
+  },
+  "files": [
+    "src",
+    "tests",
+    "code",
+    "tools/provenance.py",
+    "pyproject.toml",
+    "requirements.txt",
+    "README.md",
+    "LICENSE",
+    "CITATION.cff",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "paper"
+  ]
+}

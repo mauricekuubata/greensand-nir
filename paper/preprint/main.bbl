@@ -1,0 +1,266 @@
+\begin{thebibliography}{36}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Brown(2000)]{brown2000}
+John~R. Brown.
+\newblock \emph{Foseco Ferrous Foundryman's Handbook}.
+\newblock Butterworth-Heinemann, Oxford, 11th edition, 2000.
+
+\bibitem[{American Foundry Society}(2015)]{afs2015}
+{American Foundry Society}.
+\newblock \emph{{AFS} Mold \& Core Test Handbook}.
+\newblock American Foundry Society, Schaumburg, IL, 11th edition, 2015.
+
+\bibitem[{U.S. Department of Defense}(2022)]{dod2022}
+{U.S. Department of Defense}.
+\newblock Securing defense-critical supply chains: An action plan developed in
+  response to president biden's executive order 14017.
+\newblock Technical report, Office of the Under Secretary of Defense for
+  Acquisition and Sustainment, February 2022.
+\newblock URL \url{https://apps.dtic.mil/sti/pdfs/AD1163223.pdf}.
+\newblock Released 24 February 2022. DTIC Accession Number AD1163223.
+
+\bibitem[Clark et~al.(1990)Clark, King, Klejwa, Swayze, and Vergo]{clark1990}
+Roger~N. Clark, Trude V.~V. King, Matthew Klejwa, Gregg~A. Swayze, and Norma
+  Vergo.
+\newblock High spectral resolution reflectance spectroscopy of minerals.
+\newblock \emph{Journal of Geophysical Research: Solid Earth}, 95\penalty0
+  (B8):\penalty0 12653--12680, 1990.
+\newblock \doi{10.1029/JB095iB08p12653}.
+
+\bibitem[Bishop et~al.(1994)Bishop, Pieters, and Edwards]{bishop1994}
+Janice~L. Bishop, Carl~M. Pieters, and John~O. Edwards.
+\newblock Infrared spectroscopic analyses on the nature of water in
+  montmorillonite.
+\newblock \emph{Clays and Clay Minerals}, 42\penalty0 (6):\penalty0 702--716,
+  1994.
+\newblock \doi{10.1346/CCMN.1994.0420606}.
+
+\bibitem[Segelstein(1981)]{segelstein1981}
+David~J. Segelstein.
+\newblock The complex refractive index of water.
+\newblock Master's thesis, University of Missouri--Kansas City, 1981.
+\newblock URL \url{http://hdl.handle.net/10355/11599}.
+
+\bibitem[Hale and Querry(1973)]{hale1973}
+George~M. Hale and Marvin~R. Querry.
+\newblock Optical constants of water in the 200-nm to 200-$\mu$m wavelength
+  region.
+\newblock \emph{Applied Optics}, 12\penalty0 (3):\penalty0 555--563, 1973.
+\newblock \doi{10.1364/AO.12.000555}.
+
+\bibitem[Workman and Weyer(2012)]{workman2012}
+Jerry Workman and Lois Weyer.
+\newblock \emph{Practical Guide and Spectral Atlas for Interpretive
+  Near-Infrared Spectroscopy}.
+\newblock CRC Press, Boca Raton, FL, 2nd edition, 2012.
+
+\bibitem[Sherman and Waite(1985)]{sherman1985}
+David~M. Sherman and T.~David Waite.
+\newblock Electronic spectra of {Fe}$^{3+}$ oxides and oxide hydroxides in the
+  near {IR} to near {UV}.
+\newblock \emph{American Mineralogist}, 70:\penalty0 1262--1269, 1985.
+
+\bibitem[Giese and Krejchi(2014)]{giese2014}
+Scott~R. Giese and B.~Krejchi.
+\newblock Preliminary investigation of near-infrared spectroscopy for green
+  sand component identification.
+\newblock \emph{AFS Transactions}, 2014.
+\newblock Paper 14-027.
+
+\bibitem[Dungan and Reeves(2007)]{dungan2007}
+Robert~S. Dungan and III Reeves, James~B.
+\newblock Near infrared spectroscopic analysis of foundry moulding and core
+  sands.
+\newblock \emph{Journal of Near Infrared Spectroscopy}, 15\penalty0
+  (4):\penalty0 189--194, 2007.
+\newblock \doi{10.1255/jnirs.729}.
+
+\bibitem[Kuubata(2025)]{kuubata2025}
+Maurice Kuubata.
+\newblock {NIR} spectroscopy as a tool for identifying additives in foundry
+  green sands.
+\newblock Graduate research paper, m.s. applied engineering and technical
+  management, University of Northern Iowa, 2025.
+\newblock URL \url{https://scholarworks.uni.edu/grp/4669}.
+
+\bibitem[Kokaly et~al.(2017{\natexlab{a}})Kokaly, Clark, Swayze, Livo, Hoefen,
+  Pearson, Wise, Benzel, Lowers, Driscoll, and Klein]{kokaly2017data}
+Raymond~F. Kokaly, Roger~N. Clark, Gregg~A. Swayze, K.~Eric Livo, Todd~M.
+  Hoefen, Neil~C. Pearson, Richard~A. Wise, William~M. Benzel, Heather~A.
+  Lowers, Rhonda~L. Driscoll, and Anna~J. Klein.
+\newblock {USGS} spectral library version 7 data.
+\newblock U.S. Geological Survey data release, 2017{\natexlab{a}}.
+
+\bibitem[Kokaly et~al.(2017{\natexlab{b}})Kokaly, Clark, Swayze, Livo, Hoefen,
+  Pearson, Wise, Benzel, Lowers, Driscoll, and Klein]{kokaly2017ds}
+Raymond~F. Kokaly, Roger~N. Clark, Gregg~A. Swayze, K.~Eric Livo, Todd~M.
+  Hoefen, Neil~C. Pearson, Richard~A. Wise, William~M. Benzel, Heather~A.
+  Lowers, Rhonda~L. Driscoll, and Anna~J. Klein.
+\newblock {USGS} spectral library version 7.
+\newblock Data Series 1035, U.S. Geological Survey, 2017{\natexlab{b}}.
+
+\bibitem[Hapke(1981)]{hapke1981}
+Bruce Hapke.
+\newblock Bidirectional reflectance spectroscopy: 1. theory.
+\newblock \emph{Journal of Geophysical Research: Solid Earth}, 86\penalty0
+  (B4):\penalty0 3039--3054, 1981.
+\newblock \doi{10.1029/JB086iB04p03039}.
+
+\bibitem[Hapke(2012)]{hapke2012}
+Bruce Hapke.
+\newblock \emph{Theory of Reflectance and Emittance Spectroscopy}.
+\newblock Cambridge University Press, Cambridge, 2nd edition, 2012.
+\newblock \doi{10.1017/CBO9781139025683}.
+
+\bibitem[Kuubata(2026)]{greensandnir}
+Maurice Kuubata.
+\newblock greensand-nir: Green sand near-infrared reference library,
+  detection-limit benchmark and python package, version 1.0.0.
+\newblock GitHub repository and Zenodo archive, 2026.
+\newblock URL \url{https://github.com/mauricekuubata/greensand-nir}.
+
+\bibitem[Mustard and Pieters(1989)]{mustard1989}
+John~F. Mustard and Carl~M. Pieters.
+\newblock Photometric phase functions of common geologic minerals and
+  applications to quantitative analysis of mineral mixture reflectance spectra.
+\newblock \emph{Journal of Geophysical Research: Solid Earth}, 94\penalty0
+  (B10):\penalty0 13619--13634, 1989.
+\newblock \doi{10.1029/JB094iB10p13619}.
+
+\bibitem[Lekner and Dorf(1988)]{lekner1988}
+John Lekner and Michael~C. Dorf.
+\newblock Why some things are darker when wet.
+\newblock \emph{Applied Optics}, 27\penalty0 (7):\penalty0 1278--1280, 1988.
+\newblock \doi{10.1364/AO.27.001278}.
+
+\bibitem[Lobell and Asner(2002)]{lobell2002}
+David~B. Lobell and Gregory~P. Asner.
+\newblock Moisture effects on soil reflectance.
+\newblock \emph{Soil Science Society of America Journal}, 66\penalty0
+  (3):\penalty0 722--727, 2002.
+\newblock \doi{10.2136/sssaj2002.7220}.
+
+\bibitem[Currie(1968)]{currie1968}
+Lloyd~A. Currie.
+\newblock Limits for qualitative detection and quantitative determination.
+  application to radiochemistry.
+\newblock \emph{Analytical Chemistry}, 40\penalty0 (3):\penalty0 586--593,
+  1968.
+\newblock \doi{10.1021/ac60259a007}.
+
+\bibitem[Currie(1995)]{currie1995}
+Lloyd~A. Currie.
+\newblock Nomenclature in evaluation of analytical methods including detection
+  and quantification capabilities ({IUPAC} recommendations 1995).
+\newblock \emph{Pure and Applied Chemistry}, 67\penalty0 (10):\penalty0
+  1699--1723, 1995.
+\newblock \doi{10.1351/pac199567101699}.
+
+\bibitem[Polyanskiy(2024)]{polyanskiy2024}
+Mikhail~N. Polyanskiy.
+\newblock Refractiveindex.info database of optical constants.
+\newblock \emph{Scientific Data}, 11:\penalty0 94, 2024.
+\newblock \doi{10.1038/s41597-023-02898-2}.
+
+\bibitem[Lehmann and Romano(2005)]{lehmann2005}
+Erich~L. Lehmann and Joseph~P. Romano.
+\newblock \emph{Testing Statistical Hypotheses}.
+\newblock Springer, New York, 3rd edition, 2005.
+\newblock \doi{10.1007/0-387-27605-X}.
+
+\bibitem[Barnes et~al.(1989)Barnes, Dhanoa, and Lister]{barnes1989}
+R.~J. Barnes, M.~S. Dhanoa, and Susan~J. Lister.
+\newblock Standard normal variate transformation and de-trending of
+  near-infrared diffuse reflectance spectra.
+\newblock \emph{Applied Spectroscopy}, 43\penalty0 (5):\penalty0 772--777,
+  1989.
+\newblock \doi{10.1366/0003702894202201}.
+
+\bibitem[Geladi et~al.(1985)Geladi, MacDougall, and Martens]{geladi1985}
+Paul Geladi, Douglas MacDougall, and Harald Martens.
+\newblock Linearization and scatter-correction for near-infrared reflectance
+  spectra of meat.
+\newblock \emph{Applied Spectroscopy}, 39\penalty0 (3):\penalty0 491--500,
+  1985.
+\newblock \doi{10.1366/0003702854248656}.
+
+\bibitem[Savitzky and Golay(1964)]{savitzky1964}
+Abraham Savitzky and Marcel J.~E. Golay.
+\newblock Smoothing and differentiation of data by simplified least squares
+  procedures.
+\newblock \emph{Analytical Chemistry}, 36\penalty0 (8):\penalty0 1627--1639,
+  1964.
+\newblock \doi{10.1021/ac60214a047}.
+
+\bibitem[Rinnan et~al.(2009)Rinnan, van~den Berg, and Engelsen]{rinnan2009}
+{\AA}smund Rinnan, Frans van~den Berg, and S{\o}ren~Balling Engelsen.
+\newblock Review of the most common pre-processing techniques for near-infrared
+  spectra.
+\newblock \emph{TrAC Trends in Analytical Chemistry}, 28\penalty0
+  (10):\penalty0 1201--1222, 2009.
+\newblock \doi{10.1016/j.trac.2009.07.007}.
+
+\bibitem[Wold et~al.(2001)Wold, Sj{\"o}str{\"o}m, and Eriksson]{wold2001}
+Svante Wold, Michael Sj{\"o}str{\"o}m, and Lennart Eriksson.
+\newblock {PLS}-regression: a basic tool of chemometrics.
+\newblock \emph{Chemometrics and Intelligent Laboratory Systems}, 58\penalty0
+  (2):\penalty0 109--130, 2001.
+\newblock \doi{10.1016/S0169-7439(01)00155-1}.
+
+\bibitem[Cortes and Vapnik(1995)]{cortes1995}
+Corinna Cortes and Vladimir Vapnik.
+\newblock Support-vector networks.
+\newblock \emph{Machine Learning}, 20:\penalty0 273--297, 1995.
+\newblock \doi{10.1007/BF00994018}.
+
+\bibitem[Breiman(2001)]{breiman2001}
+Leo Breiman.
+\newblock Random forests.
+\newblock \emph{Machine Learning}, 45:\penalty0 5--32, 2001.
+\newblock \doi{10.1023/A:1010933404324}.
+
+\bibitem[Friedman(2001)]{friedman2001}
+Jerome~H. Friedman.
+\newblock Greedy function approximation: A gradient boosting machine.
+\newblock \emph{The Annals of Statistics}, 29\penalty0 (5):\penalty0
+  1189--1232, 2001.
+\newblock \doi{10.1214/aos/1013203451}.
+
+\bibitem[Harris et~al.(2020)Harris, Millman, van~der Walt, et~al.]{harris2020}
+Charles~R. Harris, K.~Jarrod Millman, St{\'e}fan~J. van~der Walt, et~al.
+\newblock Array programming with {NumPy}.
+\newblock \emph{Nature}, 585:\penalty0 357--362, 2020.
+\newblock \doi{10.1038/s41586-020-2649-2}.
+
+\bibitem[Virtanen et~al.(2020)Virtanen, Gommers, Oliphant,
+  et~al.]{virtanen2020}
+Pauli Virtanen, Ralf Gommers, Travis~E. Oliphant, et~al.
+\newblock {SciPy} 1.0: fundamental algorithms for scientific computing in
+  {P}ython.
+\newblock \emph{Nature Methods}, 17:\penalty0 261--272, 2020.
+\newblock \doi{10.1038/s41592-019-0686-2}.
+
+\bibitem[Pedregosa et~al.(2011)Pedregosa, Varoquaux, Gramfort, Michel, Thirion,
+  Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay]{pedregosa2011}
+Fabian Pedregosa, Ga{\"e}l Varoquaux, Alexandre Gramfort, Vincent Michel,
+  Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron
+  Weiss, Vincent Dubourg, Jake Vanderplas, Alexandre Passos, David Cournapeau,
+  Matthieu Brucher, Matthieu Perrot, and {\'E}douard Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock \emph{Journal of Machine Learning Research}, 12:\penalty0 2825--2830,
+  2011.
+
+\bibitem[Hunter(2007)]{hunter2007}
+John~D. Hunter.
+\newblock Matplotlib: A {2D} graphics environment.
+\newblock \emph{Computing in Science \& Engineering}, 9\penalty0 (3):\penalty0
+  90--95, 2007.
+\newblock \doi{10.1109/MCSE.2007.55}.
+
+\end{thebibliography}
