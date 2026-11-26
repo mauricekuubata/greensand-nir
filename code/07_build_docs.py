@@ -527,9 +527,7 @@ authors:
     given-names: "{au['given']}"
     orcid: "https://orcid.org/{au['orcid']}"
     affiliation: "{au['affiliation']}"
-license:
-  - CC-BY-4.0
-  - MIT
+license: CC-BY-4.0
 repository-code: "https://github.com/{GH_USER}/{REPO}"
 keywords:
   - near-infrared spectroscopy
@@ -577,6 +575,21 @@ keywords:
     for k, v in recs.items():
         meta = {**common, **{kk: vv for kk, vv in v.items() if kk != "files"}}
         w(f"zenodo/{k}.json", json.dumps({"metadata": meta, "files": v["files"]}, indent=2))
+
+    # .zenodo.json: metadata for the record Zenodo makes from a GitHub release (whole repository).
+    # Zenodo reads it in preference to CITATION.cff.
+    gh_meta = {**common, "upload_type": "dataset", "license": "cc-by-4.0",
+               "title": "Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark",
+               "description": (f"<p>Open near-infrared reference library and detection-limit benchmark for foundry green sand "
+                               f"additive control: {L['n_dry']:,} dry and {L['n_moist']:,} moist computed spectra (1000-2350 nm), "
+                               "12 benchmark sets with baseline results and a leaderboard, the greensand-nir Python package, "
+                               "documentation and the preprint source. Spectra are computed by Hapke single-scattering-albedo "
+                               "mixing of USGS Spectral Library Version 7 spectra, with seacoal and red iron oxide effective "
+                               "particle sizes calibrated to 24 measured dry mixtures (Kuubata 2025).</p>"
+                               "<p>Licenses: data and documents CC BY 4.0 (LICENSE-DATA); code MIT (LICENSE).</p>")}
+    gh_meta["related_identifiers"] = [r for r in gh_meta.get("related_identifiers", [])
+                                      if r.get("relation") != "isSupplementTo"]
+    w(".zenodo.json", json.dumps(gh_meta, indent=2))
 
     # ------------------------------------------------------------------ PUBLISH GUIDE
     w("docs/PUBLISH_GUIDE.md", f"""

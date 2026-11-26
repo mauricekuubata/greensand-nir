@@ -1,0 +1,39 @@
+{
+  "creators": [
+    {
+      "name": "Kuubata, Maurice",
+      "orcid": "0009-0003-3178-5971",
+      "affiliation": "Independent Researcher, Dubuque, Iowa, USA"
+    }
+  ],
+  "access_right": "open",
+  "version": "1.0.0",
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "10.5066/F7RR1WDJ",
+      "relation": "isDerivedFrom",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://scholarworks.uni.edu/grp/4669",
+      "relation": "isDerivedFrom",
+      "scheme": "url"
+    }
+  ],
+  "keywords": [
+    "near-infrared spectroscopy",
+    "foundry",
+    "green sand",
+    "seacoal",
+    "iron oxide",
+    "spectral library",
+    "detection limit",
+    "chemometrics"
+  ],
+  "notes": "Claude (Anthropic) assisted with code and data handling; Maurice Kuubata set every mixing rule and verified every output.",
+  "upload_type": "dataset",
+  "license": "cc-by-4.0",
+  "title": "Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark",
+  "description": "<p>Open near-infrared reference library and detection-limit benchmark for foundry green sand additive control: 4,410 dry and 6,930 moist computed spectra (1000-2350 nm), 12 benchmark sets with baseline results and a leaderboard, the greensand-nir Python package, documentation and the preprint source. Spectra are computed by Hapke single-scattering-albedo mixing of USGS Spectral Library Version 7 spectra, with seacoal and red iron oxide effective particle sizes calibrated to 24 measured dry mixtures (Kuubata 2025).</p><p>Licenses: data and documents CC BY 4.0 (LICENSE-DATA); code MIT (LICENSE).</p>"
+}
