@@ -10,6 +10,9 @@ from __future__ import annotations
 import numpy as np
 from scipy.signal import savgol_filter
 
+# numpy >= 2.0 names the trapezoid rule np.trapezoid; older releases call it np.trapz
+trapezoid = getattr(np, "trapezoid", None) or np.trapz
+
 
 def absorbance(R):
     """log10(1/R)."""
@@ -61,4 +64,4 @@ def band_area(R, wl, lo=1000, hi=2350):
     """Area under the absorbance curve between lo and hi nm (absorbance x nm)."""
     sel = (wl >= lo) & (wl <= hi)
     A = absorbance(R)
-    return np.trapezoid(A[..., sel], wl[sel], axis=-1)
+    return trapezoid(A[..., sel], wl[sel], axis=-1)

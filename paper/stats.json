@@ -241,7 +241,7 @@
         "trends_reproduced": "5/5"
       },
       {
-        "variant": "USGS priors only (Hapke, seacoal 75 um, iron oxide 5 um)",
+        "variant": "assumed sizes, no lab calibration (Hapke, seacoal 75 um, iron oxide 5 um)",
         "PC1_seacoal_median_pct": 99.39,
         "PC1_iron_oxide_median_pct": 90.68,
         "rho_PC1_seacoal": 0.934,
@@ -354,7 +354,7 @@
         "method": "PCA-LDA",
         "detection_limit_pct": NaN,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.0,
+        "seconds": 0.3,
         "lowest_level_detected": 0.2,
         "misses_higher_levels": true
       },
@@ -366,7 +366,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.3,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.4,
         "lowest_level_detected": 0.3,
         "misses_higher_levels": false,
         "n_components": 6,
@@ -393,7 +393,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 0.15,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.7,
         "lowest_level_detected": 0.15,
         "misses_higher_levels": false
       },
@@ -456,7 +456,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.7,
+        "seconds": 0.8,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       },
@@ -468,7 +468,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.6,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false
       },
@@ -519,7 +519,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.7,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false
       },
@@ -531,7 +531,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.4,
+        "seconds": 0.6,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false
       },
@@ -555,7 +555,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.1,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.3,
+        "seconds": 0.4,
         "lowest_level_detected": 0.1,
         "misses_higher_levels": false,
         "n_components": 4,
@@ -582,7 +582,7 @@
         "method": "RandomForest",
         "detection_limit_pct": NaN,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.8,
         "lowest_level_detected": NaN,
         "misses_higher_levels": false
       },
@@ -594,7 +594,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": NaN,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.5,
         "lowest_level_detected": NaN,
         "misses_higher_levels": false
       },
@@ -618,7 +618,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.75,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.4,
         "lowest_level_detected": 0.75,
         "misses_higher_levels": false,
         "n_components": 4,
@@ -657,7 +657,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.7,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       },
@@ -708,7 +708,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.8,
+        "seconds": 0.9,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       },
@@ -807,7 +807,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.15,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.4,
+        "seconds": 0.5,
         "lowest_level_detected": 0.15,
         "misses_higher_levels": false,
         "n_components": 8,
@@ -834,7 +834,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 1.0,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.8,
+        "seconds": 0.9,
         "lowest_level_detected": 1.0,
         "misses_higher_levels": false
       },
@@ -870,7 +870,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.4,
+        "seconds": 0.5,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false,
         "n_components": 6,
@@ -897,7 +897,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.7,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false
       },
@@ -909,7 +909,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 0.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.6,
         "lowest_level_detected": 0.5,
         "misses_higher_levels": false
       },
@@ -996,7 +996,7 @@
         "method": "PLSR",
         "detection_limit_pct": 0.75,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.5,
+        "seconds": 0.4,
         "lowest_level_detected": 0.75,
         "misses_higher_levels": false,
         "n_components": 4,
@@ -1035,7 +1035,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.6,
+        "seconds": 0.5,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       },
@@ -1086,7 +1086,7 @@
         "method": "RandomForest",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.7,
+        "seconds": 0.8,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       },
@@ -1098,7 +1098,7 @@
         "method": "GradientBoosting",
         "detection_limit_pct": 1.5,
         "submitted_by": "baseline (greensand-nir v1.0)",
-        "seconds": 0.7,
+        "seconds": 0.6,
         "lowest_level_detected": 1.5,
         "misses_higher_levels": false
       }
@@ -1245,7 +1245,7 @@
         "r2cv": 0.9488
       },
       {
-        "scenario": "USGS priors (no lab calibration)",
+        "scenario": "assumed sizes (no lab calibration)",
         "track": "dry",
         "target": "seacoal",
         "PLSR_detection_limit_pct": 0.3,
@@ -1254,7 +1254,7 @@
         "r2cv": 0.956
       },
       {
-        "scenario": "USGS priors (no lab calibration)",
+        "scenario": "assumed sizes (no lab calibration)",
         "track": "dry",
         "target": "iron_oxide",
         "PLSR_detection_limit_pct": 0.15,

@@ -16,7 +16,7 @@ import pandas as pd
 
 from .compositions import ORDER
 from .mixing import mix
-from .preprocess import absorbance
+from .preprocess import absorbance, trapezoid
 
 DC2_LEVELS = (3, 6, 9, 12)
 ADDITIVE_LEVELS = {"seacoal": (0, 1, 3, 5), "iron_oxide": (0, 0.5, 1, 2)}
@@ -38,6 +38,9 @@ def simulate(E, instrument, additive, grains=None, model="hapke_diffusive", tier
     d = design(additive)
     m = d[[f"{c}_pct" for c in ORDER]].to_numpy(float) / 100.0
     gr = [(grains or E.grain_um)[o] for o in ORDER]
+    if any(isinstance(x, str) for x in gr):
+        raise ValueError("grain sizes still hold a placeholder such as 'lab_fit'; pass numeric grains "
+                         "(for example the sizes in data/processed/lab_calibration.json)")
     R = mix(E.matrix(list(ORDER)), m, [E.density[o] for o in ORDER], gr, model=model)
     Ri = instrument.resample(R) if tier is None else instrument.measure(R, tier, rng)
     return d, Ri
@@ -52,7 +55,7 @@ def relative_auc(A, wl, dc2, additive_pct):
         base = idx[np.asarray(additive_pct)[idx] == 0]
         if len(base) != 1:
             raise ValueError(f"need exactly one baseline for DC2 {dc}")
-        out[idx] = np.trapezoid(A[idx] - A[base[0]], wl, axis=1)
+        out[idx] = trapezoid(A[idx] - A[base[0]], wl, axis=1)
     return out
 
 

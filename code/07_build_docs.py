@@ -50,6 +50,17 @@ def main():
     status = f"Released v{VERSION}" if a.final else f"DRAFT v{VERSION} (not yet verified by the author)"
     draft = "" if a.final else "> **DRAFT.** Not yet verified by the author. Do not cite or reuse until this banner is gone.\n\n"
     today = datetime.date.today().isoformat()
+    accessed = {}  # file name -> access date recorded when it was fetched
+    for prov in ("PROVENANCE.txt", "PROVENANCE_lab.txt"):
+        pp = os.path.join(ROOT, "data", "raw", prov)
+        if os.path.exists(pp):
+            for line in open(pp, encoding="utf-8"):
+                parts = [x.strip() for x in line.split("|")]
+                if len(parts) > 2 and not line.startswith(" "):
+                    accessed[parts[1]] = parts[0]
+    acc_usgs = accessed.get("ASCIIdata_splib07b_cvASD.zip", "see PROVENANCE.txt")
+    acc_water = accessed.get("water_nk_Segelstein1981.yml", "see PROVENANCE.txt")
+    acc_lab = accessed.get("lab_pc1_auc_transcribed.csv", "see PROVENANCE_lab.txt")
     lb = pd.DataFrame(B["leaderboard"])
     plsr = lb[lb.method == "PLSR"].set_index(["track", "tier", "target"]).detection_limit_pct
     def P(track, tier, tgt):
@@ -69,6 +80,7 @@ def main():
     fe_rng = (min(x["iron_oxide_um"] for x in loo), max(x["iron_oxide_um"] for x in loo))
     spots = L["spot_rows"]
     ins = rules["instrument"]
+    inst_first = f"R_{ins['start_nm']:.2f}"
     tiers = rules["noise_tiers"]
     cite = (f"{au['family']}, {au['given'][0]}. (2026). Green Sand Near-Infrared Reference Library and "
             f"Detection-Limit Benchmark (v{VERSION}). Zenodo. DOI pending.")
@@ -94,7 +106,7 @@ def main():
 
 **Status:** {status} | **Maintainer:** {au['name']}, [ORCID {au['orcid']}](https://orcid.org/{au['orcid']}) | **License:** code MIT, data CC BY 4.0 | **DOI:** pending
 
-{draft}**In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but nobody has published which additive levels such a sensor can actually detect. This project provides an open set of {L['n_dry']:,} computed green sand spectra (plus {L['n_moist']:,} moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
+{draft}**In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but there is no public, shared reference for which additive levels such a sensor can reliably detect. This project provides an open set of {L['n_dry']:,} computed green sand spectra (plus {L['n_moist']:,} moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
 
 New here? Read [docs/START_HERE.md](docs/START_HERE.md). Terms are explained in [docs/GLOSSARY.md](docs/GLOSSARY.md).
 
@@ -102,9 +114,9 @@ New here? Read [docs/START_HERE.md](docs/START_HERE.md). Terms are explained in 
 
 A versioned library of computed near-infrared reflectance spectra of foundry green sand (silica sand, bentonite, seacoal, red iron oxide, water) across production ranges: {rules['library_grid']['clay_pct']['start']}-{rules['library_grid']['clay_pct']['stop']}% clay, 0-5% seacoal, 0-2% iron oxide and, in the moisture extension, 2-5% water. Spectra are computed from USGS Spectral Library Version 7 reference spectra with Hapke (single-scattering albedo) mixing, calibrated against 24 measured dry mixtures from Kuubata (2025, University of Northern Iowa), and provided both at 1 nm and resampled to the {ins['start_nm']}-{ins['stop_nm']} nm InGaAs instrument class used in that study ({L['n_instrument_channels']} channels, {ins['step_nm']} nm spacing). A detection-limit benchmark scores any calibration method with one rule: false alarms on clean sand held at 5%, detection limit = lowest level caught in at least 95% of samples, at that level and above.
 
-## Headline results (do not cite until verified)
+## Headline results{"" if a.final else " (do not cite until verified)"}
 
-- The calibrated model reproduces **{cal_def['trends_reproduced']}** of the laboratory trends checked (first principal component {cal_def['PC1_seacoal_median_pct']}% for seacoal vs 99.23% measured; {cal_def['PC1_iron_oxide_median_pct']}% for red iron oxide vs 97.87% measured). Uncalibrated USGS priors reproduce {usgs['trends_reproduced']}; simple linear mixing {linr['trends_reproduced']}.
+- The calibrated model reproduces **{cal_def['trends_reproduced']}** of the laboratory trends checked (first principal component {cal_def['PC1_seacoal_median_pct']}% for seacoal vs 99.23% measured; {cal_def['PC1_iron_oxide_median_pct']}% for red iron oxide vs 97.87% measured). With the assumed starting particle sizes (no lab calibration) the model reproduces {usgs['trends_reproduced']}; with simple linear mixing, {linr['trends_reproduced']}.
 - **Partial least squares regression (PLSR)**, lab-grade noise, dry sand: seacoal detected from **{P('dry','lab','seacoal')}%**, red iron oxide from **{P('dry','lab','iron_oxide')}%**. Plant-floor noise: {P('dry','plant','seacoal')}% and {P('dry','plant','iron_oxide')}%. Moist sand (2-5% water), lab noise: {P('moist','lab','seacoal')}% and {P('moist','lab','iron_oxide')}%.
 - Present-or-absent machine-learning classifiers can miss high additive levels they were not tuned for; see the leaderboard column "misses higher levels".
 
@@ -168,9 +180,9 @@ Train on `benchmark/sets/<set>_calibration.csv.gz`, score every row of `<set>_te
 
 | Source | Vintage | License | Accessed |
 |---|---|---|---|
-| Kokaly et al., USGS Spectral Library Version 7 Data, https://doi.org/10.5066/F7RR1WDJ | 2017 | US public domain | {today} |
-| Segelstein (1981), liquid water optical constants, via refractiveindex.info database | 1981 | CC0 | {today} |
-| Kuubata (2025), NIR Spectroscopy as a Tool for Identifying Additives in Foundry Green Sands, UNI, https://scholarworks.uni.edu/grp/4669 | 2025 | author's own work; 24 values transcribed | {today} |
+| Kokaly et al., USGS Spectral Library Version 7 Data, https://doi.org/10.5066/F7RR1WDJ | 2017 | US public domain | {acc_usgs} |
+| Segelstein (1981), liquid water optical constants, via refractiveindex.info database | 1981 | CC0 | {acc_water} |
+| Kuubata (2025), NIR Spectroscopy as a Tool for Identifying Additives in Foundry Green Sands, UNI, https://scholarworks.uni.edu/grp/4669 | 2025 | author's own work; 24 values transcribed | {acc_lab} |
 
 ## Limitations
 
@@ -197,7 +209,7 @@ A free, permanent set of computer-made near-infrared spectra of foundry green sa
 
 ## Why it matters
 
-Foundries control sand with slow offline tests such as loss on ignition. By the time a result comes back, a bad batch may already be in molds, and the problem shows up as scrap. NIR sensors read sand in seconds, but no one has published which additive levels they can actually catch. This project answers that question openly, so a foundry, a sensor maker or a researcher can check a sensor or a calibration before trusting it on the line. The U.S. Department of Defense's February 2022 report on securing defense-critical supply chains names castings and forgings among its high-priority areas.
+Foundries control sand with slow offline tests such as loss on ignition. By the time a result comes back, a bad batch may already be in molds, and the problem shows up as scrap. NIR sensors read sand in seconds, but there is no public, shared reference for which additive levels they can reliably catch. This project builds one openly, so a foundry, a sensor maker or a researcher can check a sensor or a calibration before trusting it on the line. The U.S. Department of Defense's February 2022 report *Securing Defense-Critical Supply Chains* names castings and forgings among its high-priority areas (https://media.defense.gov/2022/Feb/24/2002944158/-1/-1/1/DOD-EO-14017-REPORT-SECURING-DEFENSE-CRITICAL-SUPPLY-CHAINS.PDF).
 
 Think of it as an eye chart for sand sensors: a fixed set of "letters" of known size, and a rule for reading the smallest line.
 
@@ -292,7 +304,6 @@ Water is a thin film on every grain. Its thickness comes from mass balance (wate
 """ + "\n".join(f"| {k} | {v['snr']} | {v['multiplicative_sd']} | {v['offset_sd']} | {v['slope_sd']} |" for k, v in tiers.items()) + "\n")
 
     # ------------------------------------------------------------------ CODEBOOK
-    inst_first = f"R_{ins['start_nm']:.2f}"
     w("docs/CODEBOOK.md", f"""
 # Codebook
 
@@ -315,7 +326,7 @@ Water is a thin film on every grain. Its thickness comes from mass balance (wate
 
 ## *_spectra_instrument.csv
 
-`sample_id`, then `R_<centre nm>` for {L['n_instrument_channels']} instrument channels ({ins['start_nm']} to {ins['stop_nm']} nm, {ins['step_nm']} nm spacing, {ins['fwhm_nm']} nm Gaussian response). Noise-free; add noise with `greensand_nir.instrument.Instrument.measure`.
+`sample_id`, then `R_<centre nm>` for {L['n_instrument_channels']} instrument channels, labelled to 0.01 nm (`{inst_first}`, `R_{ins['start_nm'] + ins['step_nm']:.2f}`, ...; centres {ins['start_nm']} + {ins['step_nm']} x i nm up to {ins['stop_nm']} nm, {ins['fwhm_nm']} nm Gaussian response). Same channel labels as the benchmark sets. Noise-free; add noise with `greensand_nir.instrument.Instrument.measure`.
 
 ## library/endmembers_native1nm.csv
 
@@ -333,7 +344,7 @@ Calibration files: {B['n_cal']} spectra, 25% with zero target additive, the rest
 
 ## benchmark/leaderboard.csv
 
-set, track (dry/moist), tier (ideal/lab/plant), target, method, detection_limit_pct (lowest level with at least 95% detection at it and every higher level, with false alarms at 5%; blank = not reached), lowest_level_detected (first level reaching 95%), misses_higher_levels (true if a higher level later falls below 95%), submitted_by, plus PLSR diagnostics (n_components, rmsecv, r2cv).
+set, track (dry/moist), tier (ideal/lab/plant), target, method, detection_limit_pct (lowest level with at least 95% detection at it and every higher level, with false alarms at 5%; blank = not reached), lowest_level_detected (first level reaching 95%), misses_higher_levels (true if a higher level later falls below 95%), submitted_by, seconds (fit plus scoring time, baselines only), PLSR diagnostics (n_components, rmsecv, r2cv), and url (link to the code, community submissions only).
 
 ## data/raw/lab_kuubata2025/lab_pc1_auc_transcribed.csv
 
@@ -352,8 +363,8 @@ qa_report.txt (quality checks), lab_calibration*.json/csv (fit of effective size
 
 1. **Computed, not measured.** Every library spectrum is calculated from pure-material spectra with a physical mixing model. Real sand has grain coatings, oolitic clay, burnt clay, fines and dead clay that the model does not include.
 2. **No coal in the USGS library.** Seacoal is represented by kerogen (BK-Cornell), the organic matter coal forms from. It matches seacoal's darkness but not necessarily its exact absorption bands near 1700 and 2300 nm. With carbon black instead, the PLSR seacoal detection limit (dry, lab noise) is {SL('seacoal = carbon black','seacoal')}% instead of {SL('calibrated default','seacoal')}%.
-3. **Red iron oxide stand-in.** The bright synthetic hematite in the USGS library (GDS27) cannot reproduce the measured AUC increase at any particle size (it is brighter than the sand beyond about 1100 nm). The darker fine natural hematite GDS69 (<10 um fraction) is used instead. Foundry red iron oxide products differ; this is the most important stand-in to replace with a measured spectrum.
-4. **Effective sizes are fitted, not measured.** Seacoal ({gr['seacoal']} um) and iron oxide ({gr['iron_oxide']} um) sizes were fitted to 24 dry laboratory AUC values from one study, one sand, one bentonite. Leaving out one DC2 group at a time moves them within {sc_rng[0]:g}-{sc_rng[1]:g} um and {fe_rng[0]:g}-{fe_rng[1]:g} um. The iron oxide value is far below the wavelength, where Hapke theory is approximate: treat it as an empirical parameter.
+3. **Red iron oxide stand-in.** The bright synthetic hematite in the USGS library (GDS27) cannot reproduce the measured AUC increase at any particle size (it is brighter than the sand from about 1135 nm onward). The darker fine natural hematite GDS69 (<10 um fraction) is used instead. Foundry red iron oxide products differ; this is the most important stand-in to replace with a measured spectrum.
+4. **Effective sizes are fitted, not measured.** Seacoal ({gr['seacoal']} um) and iron oxide ({gr['iron_oxide']} um) sizes were fitted to 24 dry laboratory AUC values from one study, one sand, one bentonite. They are chosen from a {C['grid_um'][2]}-point logarithmic grid ({C['grid_um'][0]}-{C['grid_um'][1]} um), so neighbouring candidate sizes differ by about {(float(C['grid_um'][1]) / float(C['grid_um'][0])) ** (1 / (C['grid_um'][2] - 1)) * 100 - 100:.0f}%; the reported sizes are not more precise than that. Leaving out one DC2 group at a time moves them within {sc_rng[0]:g}-{sc_rng[1]:g} um and {fe_rng[0]:g}-{fe_rng[1]:g} um. The iron oxide value is far below the wavelength, where Hapke theory is approximate: treat it as an empirical parameter.
 5. **Shared-baseline offsets in the lab data.** The measured AUC values contain a component shared by all additive levels at each DC2 level ({', '.join(f'DC2 {k}%: {v:g}' for k, v in offs.items())} AUC units). The model cannot produce this from composition, so the calibration treats it as a per-group offset. It most likely comes from the single 0% additive sample per DC2 level (packing, measurement session, mirror reference). Without the offsets, computed and measured AUC differ by {cal_def['AUC_rmse_vs_lab']} units RMSE (with offsets {cal_def['AUC_rmse_vs_lab_with_group_offsets']}). Consequence: the library does not reproduce the measured increase of additive AUC with DC2 content.
 6. **Bentonite type.** The paper calls DC2 "Southern Bentonite" in the methods and "Western Bentonite" in figure legends. The library uses sodium montmorillonite SWy-1 (western). With calcium montmorillonite SAz-1, the PLSR seacoal limit is {SL('clay = calcium montmorillonite SAz-1','seacoal')}%.
 7. **Water model is uncalibrated.** Moisture is a uniform film with pure geometric path length (path factor {rules['water']['path_factor']}). It ignores darkening from refractive-index matching, water held between clay layers, and compaction. Real moist green sand is likely darker with stronger water bands. Raising the path factor to 4 changes the moist-sand PLSR limits to {SL('calibrated default, water path factor 4','seacoal','moist')}% seacoal and {SL('calibrated default, water path factor 4','iron_oxide','moist')}% iron oxide. Use the moisture extension as a first approximation until measured moist spectra exist.
@@ -468,13 +479,13 @@ The build made these choices provisionally. Agree or change each one. Each chang
 
 ## Two-sentence version
 
-{au['name']} built the first open near-infrared reference library and detection-limit benchmark for foundry green sand, calibrated against his own UNI laboratory measurements. It tells foundries and sensor makers which seacoal and iron oxide levels an NIR sensor can actually detect, so sand can be checked before pouring instead of after scrap.
+{au['name']} built an open near-infrared reference library and detection-limit benchmark for foundry green sand, calibrated against his own UNI laboratory measurements. It tells foundries and sensor makers which seacoal and iron oxide levels an NIR sensor can detect in principle, so sand can be checked before pouring instead of after scrap.
 
 ## Questions you may be asked
 
 1. **Where does the data come from?** Measured spectra of pure minerals from the U.S. Geological Survey's public spectral library, mixed with a standard physics model, and calibrated against 24 dry green sand mixtures I measured at UNI.
 2. **What are its limits?** The spectra are computed, not measured, and calibrated to one small dry laboratory study. The USGS library has no coal, so seacoal uses a stand-in, and the moisture model is a first approximation. The numbers show what is detectable in principle, not what a specific sensor will do in a specific plant.
-3. **Why does this matter for the United States?** The Department of Defense's February 2022 supply-chain report names castings and forgings among its high-priority areas. Better, faster sand control means less scrap and steadier output from U.S. foundries, and this gives the whole industry a free, common yardstick for NIR sensors.
+3. **Why does this matter for the United States?** The Department of Defense's February 2022 report *Securing Defense-Critical Supply Chains* names castings and forgings among its high-priority areas. Better, faster sand control means less scrap and steadier output from U.S. foundries, and this gives the whole industry a free, common yardstick for NIR sensors.
 """)
 
     # ------------------------------------------------------------------ NEXT STEPS
@@ -491,6 +502,18 @@ The build made these choices provisionally. Agree or change each one. Each chang
 6. Publish the package on PyPI and submit the software paper (paper/paper.md) to the Journal of Open Source Software.
 """)
 
+    # ------------------------------------------------------------------ CHANGELOG
+    w("CHANGELOG.md", f"""
+# Changelog
+
+## {VERSION} ({today if a.final else "unreleased draft"})
+- Library v1.0: {L['n_dry']:,} dry computed spectra (3-12% clay, 0-5% seacoal, 0-2% red iron oxide).
+- Moisture extension: {L['n_moist']:,} computed spectra at 2-5% water.
+- Detection-limit benchmark: 12 sets, scoring rule, 5 baseline methods, leaderboard page.
+- Package greensand-nir: mixing, water film, instrument and noise model, preprocessing, PLSR, benchmark, lab replication.
+- Calibration of seacoal and red iron oxide effective sizes to Kuubata (2025) laboratory AUC values.
+""")
+
     # ------------------------------------------------------------------ CITATION, metadata
     w("CITATION.cff", f"""
 cff-version: 1.2.0
@@ -504,7 +527,9 @@ authors:
     given-names: "{au['given']}"
     orcid: "https://orcid.org/{au['orcid']}"
     affiliation: "{au['affiliation']}"
-license: CC-BY-4.0
+license:
+  - CC-BY-4.0
+  - MIT
 repository-code: "https://github.com/{GH_USER}/{REPO}"
 keywords:
   - near-infrared spectroscopy
@@ -572,8 +597,8 @@ Go to https://zenodo.org/signup/ and choose **Log in with ORCID**. Your ORCID th
 
 ## Step 2: GitHub repository (10 min)
 
-1. Go to https://github.com/new. Name: `{REPO}`. Public. Do **not** add a README (the project has one). Click **Create repository**.
-2. In a terminal inside the project folder:
+1. If https://github.com/{GH_USER}/{REPO} already exists, skip to 2. Otherwise go to https://github.com/new. Name: `{REPO}`. Public. Do **not** add a README (the project has one). Click **Create repository**.
+2. In a terminal inside the project folder (if the repository already has commits, use `git pull origin main --allow-unrelated-histories` before pushing, or push from a fresh clone):
    ```
    git init -b main
    git add -A
@@ -599,6 +624,8 @@ This writes `release/greensand-nir-library-v{VERSION}.zip`, `-benchmark-`, `-moi
 
 Alternative for the software record: Zenodo > **Account > GitHub**, flip the switch for `{REPO}`, then on GitHub **Releases > Draft a new release**, tag `v{VERSION}`, publish. Zenodo mints the software DOI automatically.
 
+Scripted alternative: `python tools/zenodo_deposit.py --files release/greensand-nir-library-v{VERSION}.zip --metadata zenodo/library.json --sandbox` reads the record file directly (needs `pip install requests` and a ZENODO_SANDBOX_TOKEN in the shell). Drop `--sandbox` and add `--publish` only after checking the sandbox record.
+
 Faster, if you prefer: create a Zenodo token (https://zenodo.org/account/settings/applications/tokens/new/, tick deposit:write and deposit:actions) and a GitHub token (https://github.com/settings/tokens, tick "repo"), give them to Claude in a new session, and it will push to the Zenodo sandbox first so you can see the result, then for real. Revoke both tokens afterwards.
 
 ## Step 4: Record the DOIs (5 min)
@@ -622,13 +649,18 @@ Create an account at https://pypi.org, make an API token, then `python -m build`
 `paper/paper.md` is a draft. JOSS expects substantial, tested, documented software; submit at https://joss.theoj.org/papers/new with the repository URL and the software DOI after the package has been public for a while and you have rewritten the paper in your own words.
 """)
 
-    w("docs/evidence_log.csv", "date,artifact_or_event,type,venue_or_host,link_or_doi,status,prong_tags,metrics_snapshot,files_saved,notes\n"
+    # the evidence log is filled in by hand after release: never overwrite an existing one
+    if not os.path.exists(os.path.join(ROOT, "docs", "evidence_log.csv")):
+      w("docs/evidence_log.csv", "date,artifact_or_event,type,venue_or_host,link_or_doi,status,prong_tags,metrics_snapshot,files_saved,notes\n"
       f"YYYY-MM-DD,Green Sand NIR Library v{VERSION},dataset,Zenodo + GitHub,pending,not yet published,,0 downloads at release,zenodo_record.pdf,fill on release day\n"
       f"YYYY-MM-DD,Green Sand NIR Detection-Limit Benchmark v{VERSION},dataset,Zenodo + GitHub Pages,pending,not yet published,,,,\n"
       f"YYYY-MM-DD,Green Sand NIR Moisture Extension v{VERSION},dataset,Zenodo,pending,not yet published,,,,\n"
       f"YYYY-MM-DD,greensand-nir Python package v{VERSION},software,Zenodo + GitHub (+PyPI),pending,not yet published,,,,\n")
 
     # ------------------------------------------------------------------ JOSS paper draft
+    d_today = datetime.date.today()
+    n_tests = sum(1 for line in open(os.path.join(ROOT, "tests", "test_core.py"), encoding="utf-8")
+                  if line.startswith("def test_"))
     w("paper/paper.md", f"""
 ---
 title: 'greensand-nir: an open Python package and reference library for near-infrared control of foundry green sand additives'
@@ -645,27 +677,37 @@ authors:
 affiliations:
   - name: {au['affiliation']}
     index: 1
-date: {datetime.date.today().strftime('%d %B %Y')}
+date: {d_today.day} {d_today:%B %Y}
 bibliography: paper.bib
 ---
 
 {draft}# Summary
 
-Foundry green sand is silica sand bonded with bentonite clay and water, with carbonaceous additives such as seacoal and, in some systems, red iron oxide. Its additive levels are still controlled with slow offline tests such as loss on ignition, so out-of-specification sand can reach molding before results return. Near-infrared (NIR) spectroscopy can read sand in seconds, and laboratory work has shown that it separates seacoal and red iron oxide in dry green sand [@kuubata2025]. What has been missing is an open, common reference: which additive levels can an NIR method actually detect, and how does a new calibration compare?
-
-`greensand-nir` provides (1) a mixing engine that computes green sand reflectance spectra from USGS Spectral Library Version 7 reference spectra [@kokaly2017] using Hapke single-scattering-albedo mixing [@hapke2012], with a grain-surface water film using liquid water optical constants [@segelstein1981]; (2) an instrument model for the 1000-2350 nm InGaAs class, with noise and packing effects; (3) standard NIR preprocessing and PLSR calibration [@wold2001]; (4) a library of {L['n_dry']:,} dry and {L['n_moist']:,} moist computed spectra; and (5) a detection-limit benchmark with a fixed scoring rule and baselines.
+Foundry green sand is silica sand bonded with bentonite clay and water, usually with a carbonaceous additive such as seacoal and, in some systems, red iron oxide. Foundries still check additive levels with slow offline tests such as loss on ignition, so out-of-specification sand can reach the molding line before a result comes back. Near-infrared (NIR) spectroscopy reads a sample in seconds, and laboratory work has shown that it separates seacoal and red iron oxide in dry green sand [@kuubata2025]. `greensand-nir` is an open Python package that computes realistic NIR spectra of green sand mixtures from public reference spectra, simulates how a typical NIR instrument would read them, and scores any calibration method on a fixed detection-limit test, so that people choosing or building an NIR method for sand control can compare methods on common ground.
 
 # Statement of need
 
-Chemometric NIR studies of foundry sand have used proprietary spectra and instrument-specific calibrations, so detection limits are rarely reported and never comparable. Spectral libraries such as USGS splib07 hold pure minerals, not foundry mixtures. `greensand-nir` turns those public spectra into foundry-relevant mixtures, calibrates the two least-known inputs (effective particle sizes of seacoal and red iron oxide) against measured laboratory mixtures, and reports the result as detection limits under one public rule. Calibrated to 24 measured dry mixtures, the computed spectra reproduce {cal_def['trends_reproduced']} laboratory trends tested, including first-principal-component dominance ({cal_def['PC1_seacoal_median_pct']}% computed vs 99.23% measured for seacoal). Baseline PLSR detects seacoal from {P('dry','lab','seacoal')}% and red iron oxide from {P('dry','lab','iron_oxide')}% at laboratory-grade noise.
+Anyone evaluating NIR for green sand control currently has to collect and measure their own mixtures before they can say which additive levels a method detects, and published studies use different samples, instruments and decision rules, so their figures cannot be compared directly. `greensand-nir` provides the missing common reference: (1) a mixing engine that computes green sand reflectance from USGS Spectral Library Version 7 spectra [@kokaly2017] using Hapke single-scattering-albedo mixing [@hapke2012], with an optional grain-surface water film based on liquid water optical constants [@segelstein1981]; (2) an instrument model for the 1000-2350 nm InGaAs class, with signal-to-noise and packing (gain, offset, tilt) effects; (3) standard NIR preprocessing and partial least squares regression (PLSR) calibration [@wold2001]; (4) a calibration of the two least-known inputs, the effective particle sizes of seacoal and red iron oxide, against 24 measured dry laboratory mixtures; and (5) a benchmark that turns any method's scores into a detection limit under one stated rule. The intended users are foundry engineers and sand laboratories evaluating NIR, sensor makers testing calibrations, and chemometrics researchers who need a domain test set.
 
-# Functionality
+# State of the field
 
-See the README for a worked example. Core modules: `mixing` (Hapke diffusive, linear and absorbance mixing; water film), `instrument` (Gaussian spectral response, signal-to-noise profile, gain, offset and tilt), `preprocess`, `calibrate` (PLSR with cross-validated component selection), `lab` (replication of a published laboratory analysis), and `benchmark` (scoring rule and baselines).
+General-purpose tools cover parts of this workflow. scikit-learn [@pedregosa2011] provides PLSR and the classifiers used as baselines, and `greensand-nir` builds on it rather than reimplementing them. Spectral Python [@spy] reads and processes spectral libraries and imagery, and USGS splib07 [@kokaly2017] supplies measured spectra of pure minerals and materials, but neither models foundry mixtures. Hapke mixing is widely used in planetary and mineral remote sensing, usually in project-specific code [@hapke2012]. We are not aware of an open package, dataset or benchmark aimed at foundry green sand. The domain layer here (green sand composition model, laboratory-calibrated stand-in materials, instrument model for the InGaAs class used in foundry studies, and a detection-limit scoring rule) does not belong inside a general library, so a separate package that depends on those libraries was the appropriate choice.
+
+# Software design
+
+All modelling assumptions live in one rules file (`config/mixing_rules.json`), and numbered pipeline scripts read it and rebuild every output, so a changed assumption propagates to the library, benchmark, figures and documents. Hapke diffusive mixing was chosen over simple averaging because dark, fine particles darken a powder far more than their mass share suggests; on a measured USGS mixture of 2% hematite and 98% quartz, the Hapke model fits with root-mean-square error {mm['rmse_hapke']} against {mm['rmse_linear']} for linear mixing. The trade-off is that Hapke theory is approximate for particles smaller than the wavelength, so the fitted effective sizes are treated as empirical parameters and their stability is reported (leave-one-group-out refits). The benchmark scores a method by its output scores only: the alarm threshold is set at a 5% false-alarm rate on clean samples (with randomised tie handling), and the detection limit is the lowest level detected in at least 95% of samples at that level and every level above it. Any method, including non-linear classifiers, can therefore be compared without access to its internals. Random seeds are fixed, so the pipeline reproduces its outputs exactly, and every number in the documentation is written from a generated statistics file rather than typed by hand.
+
+# Research impact statement
+
+The package is new and has no external users yet. Its near-term value rests on concrete, reproducible materials: a library of {L['n_dry']:,} dry and {L['n_moist']:,} moist computed spectra, 12 benchmark sets (dry and moist sand, three noise tiers, two additives) with baseline results for five methods, a public leaderboard with a submission script, and {n_tests} automated tests. The computed spectra reproduce {cal_def['trends_reproduced']} laboratory trends tested in [@kuubata2025]. All outputs are archived on Zenodo with DOIs, and the stated next step is replacing the stand-in materials with measured spectra of foundry materials.
+
+# AI usage disclosure
+
+Claude (Anthropic) was used to write and review code, tests and documentation and to draft this paper. The author set every mixing rule and modelling assumption, checked the computed results against his own laboratory measurements, verified reference values, worked examples and library rows by hand using the project's verification checklist, and revised this paper.
 
 # Acknowledgements
 
-Spectra from the U.S. Geological Survey Spectroscopy Laboratory. Claude (Anthropic) assisted with code and data handling; the author set every mixing rule and verified every output.
+Reference spectra are from the U.S. Geological Survey Spectroscopy Laboratory. This work received no specific funding.
 
 # References
 """)
@@ -698,6 +740,20 @@ Spectra from the U.S. Geological Survey Spectroscopy Laboratory. Claude (Anthrop
   school = {University of Missouri-Kansas City},
   year = {1981},
   url = {http://hdl.handle.net/10355/11599}
+}
+@article{pedregosa2011,
+  author = {Pedregosa, Fabian and Varoquaux, Ga{\\"e}l and Gramfort, Alexandre and Michel, Vincent and Thirion, Bertrand and Grisel, Olivier and Blondel, Mathieu and Prettenhofer, Peter and Weiss, Ron and Dubourg, Vincent and Vanderplas, Jake and Passos, Alexandre and Cournapeau, David and Brucher, Matthieu and Perrot, Matthieu and Duchesnay, {\\'E}douard},
+  title = {Scikit-learn: Machine Learning in Python},
+  journal = {Journal of Machine Learning Research},
+  volume = {12},
+  pages = {2825--2830},
+  year = {2011}
+}
+@misc{spy,
+  author = {Boggs, Thomas},
+  title = {Spectral Python (SPy)},
+  howpublished = {Python package},
+  url = {https://www.spectralpython.net}
 }
 @article{wold2001,
   author = {Wold, Svante and Sj{\\"o}str{\\"o}m, Michael and Eriksson, Lennart},

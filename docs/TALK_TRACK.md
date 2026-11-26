@@ -14,10 +14,10 @@
 
 ## Two-sentence version
 
-Maurice Kuubata built the first open near-infrared reference library and detection-limit benchmark for foundry green sand, calibrated against his own UNI laboratory measurements. It tells foundries and sensor makers which seacoal and iron oxide levels an NIR sensor can actually detect, so sand can be checked before pouring instead of after scrap.
+Maurice Kuubata built an open near-infrared reference library and detection-limit benchmark for foundry green sand, calibrated against his own UNI laboratory measurements. It tells foundries and sensor makers which seacoal and iron oxide levels an NIR sensor can detect in principle, so sand can be checked before pouring instead of after scrap.
 
 ## Questions you may be asked
 
 1. **Where does the data come from?** Measured spectra of pure minerals from the U.S. Geological Survey's public spectral library, mixed with a standard physics model, and calibrated against 24 dry green sand mixtures I measured at UNI.
 2. **What are its limits?** The spectra are computed, not measured, and calibrated to one small dry laboratory study. The USGS library has no coal, so seacoal uses a stand-in, and the moisture model is a first approximation. The numbers show what is detectable in principle, not what a specific sensor will do in a specific plant.
-3. **Why does this matter for the United States?** The Department of Defense's February 2022 supply-chain report names castings and forgings among its high-priority areas. Better, faster sand control means less scrap and steadier output from U.S. foundries, and this gives the whole industry a free, common yardstick for NIR sensors.
+3. **Why does this matter for the United States?** The Department of Defense's February 2022 report *Securing Defense-Critical Supply Chains* names castings and forgings among its high-priority areas. Better, faster sand control means less scrap and steadier output from U.S. foundries, and this gives the whole industry a free, common yardstick for NIR sensors.

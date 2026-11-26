@@ -15,8 +15,8 @@ Go to https://zenodo.org/signup/ and choose **Log in with ORCID**. Your ORCID th
 
 ## Step 2: GitHub repository (10 min)
 
-1. Go to https://github.com/new. Name: `greensand-nir`. Public. Do **not** add a README (the project has one). Click **Create repository**.
-2. In a terminal inside the project folder:
+1. If https://github.com/mauricekuubata/greensand-nir already exists, skip to 2. Otherwise go to https://github.com/new. Name: `greensand-nir`. Public. Do **not** add a README (the project has one). Click **Create repository**.
+2. In a terminal inside the project folder (if the repository already has commits, use `git pull origin main --allow-unrelated-histories` before pushing, or push from a fresh clone):
    ```
    git init -b main
    git add -A
@@ -41,6 +41,8 @@ This writes `release/greensand-nir-library-v1.0.0.zip`, `-benchmark-`, `-moistur
 4. Click **Publish**. Copy the DOI shown (looks like 10.5281/zenodo.1234567).
 
 Alternative for the software record: Zenodo > **Account > GitHub**, flip the switch for `greensand-nir`, then on GitHub **Releases > Draft a new release**, tag `v1.0.0`, publish. Zenodo mints the software DOI automatically.
+
+Scripted alternative: `python tools/zenodo_deposit.py --files release/greensand-nir-library-v1.0.0.zip --metadata zenodo/library.json --sandbox` reads the record file directly (needs `pip install requests` and a ZENODO_SANDBOX_TOKEN in the shell). Drop `--sandbox` and add `--publish` only after checking the sandbox record.
 
 Faster, if you prefer: create a Zenodo token (https://zenodo.org/account/settings/applications/tokens/new/, tick deposit:write and deposit:actions) and a GitHub token (https://github.com/settings/tokens, tick "repo"), give them to Claude in a new session, and it will push to the Zenodo sandbox first so you can see the result, then for real. Revoke both tokens afterwards.
 

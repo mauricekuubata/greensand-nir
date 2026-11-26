@@ -8,7 +8,7 @@ A free, permanent set of computer-made near-infrared spectra of foundry green sa
 
 ## Why it matters
 
-Foundries control sand with slow offline tests such as loss on ignition. By the time a result comes back, a bad batch may already be in molds, and the problem shows up as scrap. NIR sensors read sand in seconds, but no one has published which additive levels they can actually catch. This project answers that question openly, so a foundry, a sensor maker or a researcher can check a sensor or a calibration before trusting it on the line. The U.S. Department of Defense's February 2022 report on securing defense-critical supply chains names castings and forgings among its high-priority areas.
+Foundries control sand with slow offline tests such as loss on ignition. By the time a result comes back, a bad batch may already be in molds, and the problem shows up as scrap. NIR sensors read sand in seconds, but there is no public, shared reference for which additive levels they can reliably catch. This project builds one openly, so a foundry, a sensor maker or a researcher can check a sensor or a calibration before trusting it on the line. The U.S. Department of Defense's February 2022 report *Securing Defense-Critical Supply Chains* names castings and forgings among its high-priority areas (https://media.defense.gov/2022/Feb/24/2002944158/-1/-1/1/DOD-EO-14017-REPORT-SECURING-DEFENSE-CRITICAL-SUPPLY-CHAINS.PDF).
 
 Think of it as an eye chart for sand sensors: a fixed set of "letters" of known size, and a rule for reading the smallest line.
 

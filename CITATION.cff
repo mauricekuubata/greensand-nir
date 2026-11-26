@@ -3,13 +3,15 @@ message: "If you use this work, please cite it as below."
 type: dataset
 title: "Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark"
 version: "1.0.0"
-date-released: "2026-11-20"
+date-released: "2026-11-26"
 authors:
   - family-names: "Kuubata"
     given-names: "Maurice"
     orcid: "https://orcid.org/0009-0003-3178-5971"
     affiliation: "Independent Researcher, Dubuque, Iowa, USA"
-license: CC-BY-4.0
+license:
+  - CC-BY-4.0
+  - MIT
 repository-code: "https://github.com/mauricekuubata/greensand-nir"
 keywords:
   - near-infrared spectroscopy

@@ -1,6 +1,6 @@
 # Glossary
 
-Plain definitions of the terms you will see in this project. Copy this file into each project as `docs/GLOSSARY.md`.
+Plain definitions of the terms you will see in this project.
 
 **Abstract.** A short summary at the top of a paper, usually 150 to 300 words.
 
@@ -15,8 +15,6 @@ Plain definitions of the terms you will see in this project. Copy this file into
 **Commit.** A saved snapshot of changes to the project, with a note describing what changed.
 
 **Dataset.** An organized table (or set of tables) of information, like a spreadsheet.
-
-**Docket.** The public file for a proposed government rule. Comments submitted to it become part of the official record.
 
 **DOI (Digital Object Identifier).** A permanent link and ID for your work, like a library call number that never changes. It looks like `10.5281/zenodo.1234567`.
 
@@ -44,8 +42,6 @@ Plain definitions of the terms you will see in this project. Copy this file into
 
 **Provenance.** A record of exactly where each piece of data came from and when it was downloaded.
 
-**Public comment.** Written feedback submitted to a government agency on a proposed rule, during a set comment period.
-
 **QA (quality assurance) report.** A file listing the checks run on the data: counts, matches, and anything unusual.
 
 **README.** The front page of a project. It explains what the project is and how to use it.
@@ -64,9 +60,7 @@ Plain definitions of the terms you will see in this project. Copy this file into
 
 **Stats file.** A file the pipeline writes with every number used in the paper, so the text always matches the data.
 
-**Token.** A temporary password that lets Claude upload to GitHub or Zenodo on your behalf. You can cancel it at any time.
-
-**Tracking number.** The receipt ID you get after submitting a public comment. Save it.
+**Token.** A temporary password that lets a script (or Claude) upload to GitHub or Zenodo on your behalf. Keep it in the shell, never in a file, and cancel it when you are done.
 
 **Vintage.** The year or edition of a data source.
 

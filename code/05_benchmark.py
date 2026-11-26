@@ -149,7 +149,7 @@ def main():
     if not a.skip_sensitivity:
         scen = {
             "calibrated default": dict(),
-            "USGS priors (no lab calibration)": dict(cal=None),
+            "assumed sizes (no lab calibration)": dict(cal=None),
             "linear mixing": dict(model="linear"),
             "seacoal = carbon black": dict(ov={"seacoal": {"spectrum": rules["components"]["seacoal"]["alternatives"]["carbon_black"],
                                                             "grain_um": cal_info["seacoal_um"]}}),

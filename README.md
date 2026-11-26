@@ -2,7 +2,7 @@
 
 **Status:** Released v1.0.0 | **Maintainer:** Maurice Kuubata, [ORCID 0009-0003-3178-5971](https://orcid.org/0009-0003-3178-5971) | **License:** code MIT, data CC BY 4.0 | **DOI:** pending
 
-**In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but nobody has published which additive levels such a sensor can actually detect. This project provides an open set of 4,410 computed green sand spectra (plus 6,930 moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
+**In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but there is no public, shared reference for which additive levels such a sensor can reliably detect. This project provides an open set of 4,410 computed green sand spectra (plus 6,930 moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
 
 New here? Read [docs/START_HERE.md](docs/START_HERE.md). Terms are explained in [docs/GLOSSARY.md](docs/GLOSSARY.md).
 
@@ -10,9 +10,9 @@ New here? Read [docs/START_HERE.md](docs/START_HERE.md). Terms are explained in 
 
 A versioned library of computed near-infrared reflectance spectra of foundry green sand (silica sand, bentonite, seacoal, red iron oxide, water) across production ranges: 3-12% clay, 0-5% seacoal, 0-2% iron oxide and, in the moisture extension, 2-5% water. Spectra are computed from USGS Spectral Library Version 7 reference spectra with Hapke (single-scattering albedo) mixing, calibrated against 24 measured dry mixtures from Kuubata (2025, University of Northern Iowa), and provided both at 1 nm and resampled to the 1000-2350 nm InGaAs instrument class used in that study (195 channels, 6.93 nm spacing). A detection-limit benchmark scores any calibration method with one rule: false alarms on clean sand held at 5%, detection limit = lowest level caught in at least 95% of samples, at that level and above.
 
-## Headline results (do not cite until verified)
+## Headline results
 
-- The calibrated model reproduces **5/5** of the laboratory trends checked (first principal component 99.78% for seacoal vs 99.23% measured; 95.61% for red iron oxide vs 97.87% measured). Uncalibrated USGS priors reproduce 3/5; simple linear mixing 2/5.
+- The calibrated model reproduces **5/5** of the laboratory trends checked (first principal component 99.78% for seacoal vs 99.23% measured; 95.61% for red iron oxide vs 97.87% measured). With the assumed starting particle sizes (no lab calibration) the model reproduces 3/5; with simple linear mixing, 2/5.
 - **Partial least squares regression (PLSR)**, lab-grade noise, dry sand: seacoal detected from **0.5%**, red iron oxide from **0.1%**. Plant-floor noise: 0.75% and 0.15%. Moist sand (2-5% water), lab noise: 0.5% and 0.15%.
 - Present-or-absent machine-learning classifiers can miss high additive levels they were not tuned for; see the leaderboard column "misses higher levels".
 

@@ -21,6 +21,9 @@ metadata.json example:
   "access_right": "open"
 }
 
+A project record file such as zenodo/library.json ({"metadata": {...}, "files": [...]})
+is accepted directly; its "metadata" block is used.
+
 Usage:
   python zenodo_deposit.py --files release.zip README.md --metadata metadata.json [--sandbox]
                            [--publish] [--new-version-of <record_id>]
@@ -31,7 +34,7 @@ import json
 import os
 import sys
 
-import requests
+import requests  # pip install requests (or: pip install -e ".[publish]")
 
 
 def main():
@@ -58,6 +61,9 @@ def main():
             sys.exit(f"missing file: {f}")
     with open(a.metadata) as fh:
         metadata = json.load(fh)
+    # project files in zenodo/*.json wrap the record as {"metadata": {...}, "files": [...]}
+    if isinstance(metadata.get("metadata"), dict):
+        metadata = metadata["metadata"]
     # creators from AUTHORS.json when the metadata does not name them, so the record
     # carries exactly the author block used everywhere else in the project
     if not metadata.get("creators") and a.authors and os.path.isfile(a.authors):

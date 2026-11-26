@@ -5,8 +5,8 @@ calibrated default,moist,seacoal,0.5,6,0.2737,0.9462
 calibrated default,dry,iron_oxide,0.1,4,0.0939,0.9553
 calibrated default,moist,iron_oxide,0.1,6,0.0955,0.955
 "calibrated default, water path factor 4",moist,iron_oxide,0.15,7,0.0989,0.9488
-USGS priors (no lab calibration),dry,seacoal,0.3,4,0.2371,0.956
-USGS priors (no lab calibration),dry,iron_oxide,0.15,4,0.0981,0.9527
+assumed sizes (no lab calibration),dry,seacoal,0.3,4,0.2371,0.956
+assumed sizes (no lab calibration),dry,iron_oxide,0.15,4,0.0981,0.9527
 linear mixing,dry,seacoal,4.0,2,0.8123,0.4934
 linear mixing,dry,iron_oxide,1.0,4,0.2196,0.7574
 seacoal = carbon black,dry,seacoal,0.3,4,0.2479,0.9452

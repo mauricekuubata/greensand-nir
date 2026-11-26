@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Step 4: repeat the Kuubata (2025) laboratory analysis on computed spectra and compare.
 
-Plain-language summary: this script builds the same 32 dry mixtures the UNI
-study measured, "measures" them with the simulated instrument (lab noise
-level), and runs exactly the same analysis as the study's R code: PCA on
+Plain-language summary: this script rebuilds the UNI study design (two series
+of 16 dry mixtures, one per additive; 28 distinct mixtures, because the four 0%
+additive samples are shared by both series), "measures" them with the
+simulated instrument (lab noise level), and runs exactly the same analysis as the study's R code: PCA on
 centred, scaled absorbance (1000-2350 nm), and relative AUC against the 0%
 additive sample at each DC2 level. It then checks five measured trends and
 compares the computed AUC values with the measured ones.
@@ -14,8 +15,8 @@ Trends checked (from the paper):
   T4 AUC rises with additive level within every DC2 group
   T5 the seacoal series reaches larger AUC values than the red iron oxide series
 
-Variants: the calibrated default, the USGS-only priors (no lab calibration),
-and linear mixing, so the effect of each modelling choice is visible.
+Variants: the calibrated default, the assumed starting sizes with no lab
+calibration (the grain_um_fallback values in the rules file), and linear mixing, so the effect of each modelling choice is visible.
 
 Outputs: data/processed/lab_trends.csv, data/processed/lab_auc_comparison.csv, paper/stats.json
 """
@@ -36,7 +37,7 @@ RAW = os.path.join(ROOT, "data", "raw", "splib07_selected")
 PROC = os.path.join(ROOT, "data", "processed")
 STATS = os.path.join(ROOT, "paper", "stats.json")
 LAB_PC1 = {"seacoal": 99.23, "iron_oxide": 97.87}
-N_REPEATS = 50  # independent noise draws of the whole 32-sample experiment
+N_REPEATS = 50  # independent noise draws of the whole experiment (2 series x 16 samples)
 
 
 def run_variant(E, ins, grains, model, rng):
@@ -79,7 +80,8 @@ def main():
                     "iron_oxide": rules["components"]["iron_oxide"]["grain_um_fallback"]}
     variants = {
         "calibrated default (Hapke, lab-fitted sizes)": (E, cal_grains, rules["mixing_model"]),
-        "USGS priors only (Hapke, seacoal 75 um, iron oxide 5 um)": (E, prior_grains, rules["mixing_model"]),
+        (f"assumed sizes, no lab calibration (Hapke, seacoal {prior_grains['seacoal']:g} um, "
+         f"iron oxide {prior_grains['iron_oxide']:g} um)"): (E, prior_grains, rules["mixing_model"]),
         "linear mixing (same spectra)": (E, cal_grains, "linear"),
     }
     rows, comp = [], lab[["sample_id", "additive", "dc2_pct", "additive_pct", "AUC"]].copy()
@@ -105,7 +107,7 @@ def main():
                      "AUC_rmse_vs_lab_with_group_offsets": round(rmse_off, 1),
                      **{k: "PASS" if v else "FAIL" for k, v in checks.items()},
                      "trends_reproduced": f"{sum(checks.values())}/5"})
-        comp[f"model_AUC__{name.split(' (')[0].replace(' ', '_')}"] = mean_auc.round(1)
+        comp[f"model_AUC__{name.split(' (')[0].replace(', ', '_').replace(' ', '_')}"] = mean_auc.round(1)
     df = pd.DataFrame(rows)
     df.to_csv(os.path.join(PROC, "lab_trends.csv"), index=False)
     comp.to_csv(os.path.join(PROC, "lab_auc_comparison.csv"), index=False)

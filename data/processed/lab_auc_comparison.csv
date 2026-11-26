@@ -1,4 +1,4 @@
-sample_id,additive,dc2_pct,additive_pct,AUC,model_AUC__calibrated_default,model_AUC__USGS_priors_only,model_AUC__linear_mixing
+sample_id,additive,dc2_pct,additive_pct,AUC,model_AUC__calibrated_default,model_AUC__assumed_sizes_no_lab_calibration,model_AUC__linear_mixing
 (S96+DC3+Sea1),Seacoal,3,1.0,200.628,133.5,79.2,4.4
 (S94+DC3+Sea3),Seacoal,3,3.0,313.5559,304.8,189.9,15.0
 (S92+DC3+Sea5),Seacoal,3,5.0,453.9915,421.3,273.2,28.2

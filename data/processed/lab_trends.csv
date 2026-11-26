@@ -1,4 +1,4 @@
 variant,PC1_seacoal_median_pct,PC1_iron_oxide_median_pct,rho_PC1_seacoal,rho_PC1_iron_oxide,AUC_monotone_share,AUC_vs_lab_r,AUC_rmse_vs_lab,AUC_rmse_vs_lab_with_group_offsets,T1,T2,T3,T4,T5,trends_reproduced
 "calibrated default (Hapke, lab-fitted sizes)",99.78,95.61,0.934,0.922,1.0,0.698,187.6,37.0,PASS,PASS,PASS,PASS,PASS,5/5
-"USGS priors only (Hapke, seacoal 75 um, iron oxide 5 um)",99.39,90.68,0.934,0.885,0.87,0.684,238.8,77.2,FAIL,PASS,PASS,FAIL,PASS,3/5
+"assumed sizes, no lab calibration (Hapke, seacoal 75 um, iron oxide 5 um)",99.39,90.68,0.934,0.885,0.87,0.684,238.8,77.2,FAIL,PASS,PASS,FAIL,PASS,3/5
 linear mixing (same spectra),96.3,88.39,0.861,0.212,0.05,0.827,320.3,169.6,FAIL,PASS,FAIL,FAIL,PASS,2/5

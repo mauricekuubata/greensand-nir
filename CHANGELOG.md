@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 (unreleased draft)
+## 1.0.0 (2026-11-26)
 - Library v1.0: 4,410 dry computed spectra (3-12% clay, 0-5% seacoal, 0-2% red iron oxide).
 - Moisture extension: 6,930 computed spectra at 2-5% water.
 - Detection-limit benchmark: 12 sets, scoring rule, 5 baseline methods, leaderboard page.

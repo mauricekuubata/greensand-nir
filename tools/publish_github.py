@@ -16,19 +16,32 @@ Usage:
 """
 
 import argparse
+import json
 import os
 import subprocess
 import sys
 
-import requests
+import requests  # pip install requests (or: pip install -e ".[publish]")
 
 API = "https://api.github.com"
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 
+SECRETS = []  # values masked in anything printed
+
+
+def mask(text):
+    for v in SECRETS:
+        text = text.replace(v, "***")
+    return text
+
+
 def sh(cmd, cwd, check=True):
-    print("  $", " ".join(cmd))
-    return subprocess.run(cmd, cwd=cwd, check=check, capture_output=True, text=True)
+    print("  $", mask(" ".join(cmd)))
+    r = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
+    if check and r.returncode != 0:
+        sys.exit(f"command failed ({r.returncode}): {mask(' '.join(cmd))}\n{mask(r.stderr.strip())}")
+    return r
 
 
 def headers(token):
@@ -55,6 +68,8 @@ def main():
             sys.exit("gate failed; not publishing")
 
     token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        SECRETS.append(token)
     if not token and not a.dry_run:
         sys.exit("GITHUB_TOKEN is not set. Export it in the shell (never write it to a file).")
 
@@ -88,7 +103,6 @@ def main():
         name, email = "open-project-build", "noreply@example.invalid"
         authors_path = os.path.join(root, "AUTHORS.json")
         if os.path.isfile(authors_path):
-            import json
             try:
                 first = json.load(open(authors_path))["authors"][0]
                 name = first.get("name") or name
@@ -98,11 +112,14 @@ def main():
         sh(["git", "-c", f"user.name={name}", "-c", f"user.email={email}",
             "commit", "-m", "Publish"], root)
     remote = f"https://x-access-token:{token}@github.com/{owner}/{a.repo}.git"
+    clean = f"https://github.com/{owner}/{a.repo}.git"
     sh(["git", "remote", "remove", "origin"], root, check=False)
     sh(["git", "remote", "add", "origin", remote], root)
-    sh(["git", "push", "-u", "origin", "main"], root)
-    # scrub the token from the stored remote
-    sh(["git", "remote", "set-url", "origin", f"https://github.com/{owner}/{a.repo}.git"], root)
+    try:
+        sh(["git", "push", "-u", "origin", "main"], root)
+    finally:
+        # scrub the token from the stored remote even if the push failed
+        subprocess.run(["git", "remote", "set-url", "origin", clean], cwd=root, capture_output=True)
     print(f"pushed to https://github.com/{owner}/{a.repo}")
 
     if a.release:

@@ -145,3 +145,26 @@ def test_library_files_consistent():
     inst = pd.read_csv(os.path.join(ROOT, "library", "v1.0", "GSNIR-v1.0_spectra_instrument.csv"))
     assert len(comp) == len(inst) == 4410
     assert (comp.sample_id == inst.sample_id).all()
+
+
+def test_band_area_uses_trapezoid_rule():
+    wl = np.array([1000.0, 1500.0, 2000.0])
+    R = np.full((1, 3), 0.1)  # absorbance 1 everywhere
+    assert np.isclose(g.preprocess.band_area(R, wl, 1000, 2000)[0], 1000.0)
+
+
+def test_simulate_rejects_placeholder_grain_sizes():
+    class _E:
+        grain_um = {"silica_sand": 250.0, "clay": 10.0, "seacoal": "lab_fit", "iron_oxide": 2.5}
+    with pytest.raises(ValueError):
+        g.lab.simulate(_E(), None, "seacoal")
+
+
+@pytest.mark.skipif(not os.path.exists(os.path.join(ROOT, "library", "v1.0", "GSNIR-v1.0_spectra_instrument.csv")),
+                    reason="run the pipeline first")
+def test_instrument_columns_match_channel_centres():
+    rules = g.io.load_rules(os.path.join(ROOT, "config", "mixing_rules.json"))
+    ins = rules["instrument"]
+    centres = g.instrument.channel_centers(ins["start_nm"], ins["stop_nm"], ins["step_nm"])
+    cols = pd.read_csv(os.path.join(ROOT, "library", "v1.0", "GSNIR-v1.0_spectra_instrument.csv"), nrows=0).columns[1:]
+    assert np.allclose([float(c[2:]) for c in cols], centres, atol=0.005)

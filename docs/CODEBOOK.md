@@ -19,7 +19,7 @@
 
 ## *_spectra_instrument.csv
 
-`sample_id`, then `R_<centre nm>` for 195 instrument channels (1000 to 2350 nm, 6.93 nm spacing, 15 nm Gaussian response). Noise-free; add noise with `greensand_nir.instrument.Instrument.measure`.
+`sample_id`, then `R_<centre nm>` for 195 instrument channels, labelled to 0.01 nm (`R_1000.00`, `R_1006.93`, ...; centres 1000 + 6.93 x i nm up to 2350 nm, 15 nm Gaussian response). Same channel labels as the benchmark sets. Noise-free; add noise with `greensand_nir.instrument.Instrument.measure`.
 
 ## library/endmembers_native1nm.csv
 
@@ -37,7 +37,7 @@ Calibration files: 600 spectra, 25% with zero target additive, the rest log-unif
 
 ## benchmark/leaderboard.csv
 
-set, track (dry/moist), tier (ideal/lab/plant), target, method, detection_limit_pct (lowest level with at least 95% detection at it and every higher level, with false alarms at 5%; blank = not reached), lowest_level_detected (first level reaching 95%), misses_higher_levels (true if a higher level later falls below 95%), submitted_by, plus PLSR diagnostics (n_components, rmsecv, r2cv).
+set, track (dry/moist), tier (ideal/lab/plant), target, method, detection_limit_pct (lowest level with at least 95% detection at it and every higher level, with false alarms at 5%; blank = not reached), lowest_level_detected (first level reaching 95%), misses_higher_levels (true if a higher level later falls below 95%), submitted_by, seconds (fit plus scoring time, baselines only), PLSR diagnostics (n_components, rmsecv, r2cv), and url (link to the code, community submissions only).
 
 ## data/raw/lab_kuubata2025/lab_pc1_auc_transcribed.csv
 

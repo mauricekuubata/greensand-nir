@@ -153,9 +153,10 @@ def fig5_lod(final):
         x = np.arange(len(tiers))
         for j, (track, lab) in enumerate((("dry", "Dry"), ("moist", "Moist (2-5%)"))):
             v = [p[(p.target == tgt) & (p.tier == t) & (p.track == track)].detection_limit_pct.iloc[0] for t in tiers]
-            ax.bar(x + (j - 0.5) * 0.36, v, width=0.34, color=SERIES[j], label=lab)
+            ax.bar(x + (j - 0.5) * 0.36, np.nan_to_num(v), width=0.34, color=SERIES[j], label=lab)
             for xi, vi in zip(x + (j - 0.5) * 0.36, v):
-                ax.text(xi, vi, f"{vi:g}", ha="center", va="bottom", fontsize=7, color=INK2)
+                ax.text(xi, 0 if pd.isna(vi) else vi, "not reached" if pd.isna(vi) else f"{vi:g}",
+                        ha="center", va="bottom", fontsize=7, color=INK2)
         ax.set_xticks(x, ["Ideal", "Lab", "Plant floor"])
         ax.set_title(f"{title}: PLSR detection limit", fontsize=9)
         ax.set_ylabel("% of dry mix")
@@ -174,8 +175,13 @@ def leaderboard_page(final):
         lod = "not reached" if pd.isna(r.detection_limit_pct) else f"{r.detection_limit_pct:g}"
         low = "" if pd.isna(r.get("lowest_level_detected", np.nan)) else f"{r.lowest_level_detected:g}"
         miss = "yes" if str(r.get("misses_higher_levels", "")).lower() == "true" else ""
-        rows.append(f"<tr data-target='{r.target}' data-track='{r.track}' data-tier='{r.tier}'><td>{html.escape(r.target.replace('_', ' '))}</td>"
-                    f"<td>{r.track}</td><td>{r.tier}</td><td>{html.escape(r.method)}</td><td class='num'>{lod}</td>"
+        url = r.get("url", "")
+        method = html.escape(r.method)
+        if isinstance(url, str) and url.startswith(("https://", "http://")):
+            method = f"<a href='{html.escape(url, quote=True)}'>{method}</a>"
+        rows.append(f"<tr data-target='{html.escape(str(r.target), quote=True)}' data-track='{html.escape(str(r.track), quote=True)}' "
+                    f"data-tier='{html.escape(str(r.tier), quote=True)}'><td>{html.escape(r.target.replace('_', ' '))}</td>"
+                    f"<td>{html.escape(str(r.track))}</td><td>{html.escape(str(r.tier))}</td><td>{method}</td><td class='num'>{lod}</td>"
                     f"<td class='num'>{low}</td><td>{miss}</td><td>{html.escape(str(r.submitted_by))}</td></tr>")
     tiers = st["benchmark"]["tiers"]
     banner = "" if final else "<div class='draft'>DRAFT: results not yet verified by the author. Do not cite.</div>"

@@ -20,6 +20,7 @@ import argparse
 import os
 import sys
 
+import numpy as np
 import pandas as pd
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,14 +38,24 @@ def main():
     ap.add_argument("--append", action="store_true")
     a = ap.parse_args()
 
-    test = pd.read_csv(os.path.join(ROOT, "benchmark", "sets", f"{a.set}_test.csv.gz"))
-    target = a.set.rsplit("_", 1)[-1] if not a.set.endswith("iron_oxide") else "iron_oxide"
+    test_path = os.path.join(ROOT, "benchmark", "sets", f"{a.set}_test.csv.gz")
+    if not os.path.exists(test_path):
+        sys.exit(f"no test file for set '{a.set}' (expected {os.path.relpath(test_path, ROOT)})")
+    test = pd.read_csv(test_path)
+    target = "iron_oxide" if a.set.endswith("iron_oxide") else a.set.rsplit("_", 1)[-1]
     sub = pd.read_csv(a.scores)
     if not {"sample_id", "score"} <= set(sub.columns):
         sys.exit("scores file needs columns sample_id, score")
-    merged = test[["sample_id", f"{target}_pct"]].merge(sub, on="sample_id", how="left")
-    if merged["score"].isna().any():
-        sys.exit(f"{merged['score'].isna().sum()} test samples have no score")
+    dup = sub["sample_id"].duplicated()
+    if dup.any():
+        sys.exit(f"{int(dup.sum())} sample_id values appear more than once in the scores file")
+    sub["score"] = pd.to_numeric(sub["score"], errors="coerce")
+    extra = set(sub["sample_id"]) - set(test["sample_id"])
+    if extra:
+        sys.exit(f"{len(extra)} sample_id values are not in the test set (wrong set?), e.g. {sorted(extra)[:3]}")
+    merged = test[["sample_id", f"{target}_pct"]].merge(sub[["sample_id", "score"]], on="sample_id", how="left")
+    if not np.isfinite(merged["score"].to_numpy(float)).all():
+        sys.exit(f"{int((~np.isfinite(merged['score'].to_numpy(float))).sum())} test samples have a missing or non-numeric score")
     tab, lod, thr, det = score_levels(merged["score"], merged[f"{target}_pct"], details=True)
     print(tab.to_string(index=False))
     print(f"\nDetection limit ({target}): {lod if lod == lod else 'not reached'} %")

@@ -210,7 +210,7 @@ For fixed sizes the optimal $b_k$ is the mean residual of group $k$, so the prob
 
 \subsection{Replication of the laboratory analysis}
 
-To test whether the calibrated model reproduces the measured behavior, we recreate the laboratory design (16 spectra per additive series), apply lab-tier noise, and run exactly the laboratory analysis: PCA on centered, unit-variance absorbance columns (equivalent to R's \texttt{prcomp} with \texttt{scale.=TRUE}) and the relative AUC of Eq.~\eqref{eq:auc}. Five trends are checked over 50 independent noise realizations: (T1) PC1 explains more than 95\% of variance in both series; (T2, T3) PC1 scores rise with seacoal and with iron oxide (median Spearman $\rho>0.8$); (T4) AUC rises with additive level within every DC2 group in at least 95\% of realizations; (T5) the seacoal series reaches larger AUC than the iron oxide series. The same analysis is run with uncalibrated USGS priors ($d_{\rm sc}=75$\um, $d_{\rm Fe}=5$\um) and with linear mixing.
+To test whether the calibrated model reproduces the measured behavior, we recreate the laboratory design (16 spectra per additive series), apply lab-tier noise, and run exactly the laboratory analysis: PCA on centered, unit-variance absorbance columns (equivalent to R's \texttt{prcomp} with \texttt{scale.=TRUE}) and the relative AUC of Eq.~\eqref{eq:auc}. Five trends are checked over 50 independent noise realizations: (T1) PC1 explains more than 95\% of variance in both series; (T2, T3) PC1 scores rise with seacoal and with iron oxide (median Spearman $\rho>0.8$); (T4) AUC rises with additive level within every DC2 group in at least 95\% of realizations; (T5) the seacoal series reaches larger AUC than the iron oxide series. The same analysis is run with the assumed starting sizes and no laboratory calibration ($d_{\rm sc}=75$\um, $d_{\rm Fe}=5$\um) and with linear mixing.
 
 \subsection{Library design}
 
@@ -248,7 +248,7 @@ Classifiers are trained to separate zero-target from target-containing calibrati
 
 \subsection{Sensitivity analysis and software}
 
-The PLSR detection limit (dry sand, lab tier) is recomputed under alternative assumptions: uncalibrated USGS priors, linear mixing, carbon black as seacoal, calcium montmorillonite SAz-1 as bentonite, a 30\um{} bentonite size, and a 25\,nm instrument response; for moist sand, a water path factor $\kappa=4$. The pipeline is implemented in Python with NumPy~\cite{harris2020}, SciPy~\cite{virtanen2020}, scikit-learn~\cite{pedregosa2011} and Matplotlib~\cite{hunter2007}. It runs end to end in a few minutes with fixed random seeds, and reproduces identical outputs when rerun from an empty directory.
+The PLSR detection limit (dry sand, lab tier) is recomputed under alternative assumptions: assumed starting sizes without laboratory calibration, linear mixing, carbon black as seacoal, calcium montmorillonite SAz-1 as bentonite, a 30\um{} bentonite size, and a 25\,nm instrument response; for moist sand, a water path factor $\kappa=4$. The pipeline is implemented in Python with NumPy~\cite{harris2020}, SciPy~\cite{virtanen2020}, scikit-learn~\cite{pedregosa2011} and Matplotlib~\cite{hunter2007}. It runs end to end in a few minutes with fixed random seeds, and reproduces identical outputs when rerun from an empty directory.
 
 \section{Results}\label{sec:results}
 
@@ -264,7 +264,7 @@ As an independent check, we compare the mixing rules on a measured USGS mixture 
 
 \subsection{Calibration against laboratory mixtures}\label{sec:calres}
 
-Table~\ref{tab:candidates} compares all stand-in combinations. The bright synthetic hematite GDS27 cannot reproduce the measured AUC increase at any particle size: its reflectance exceeds that of the sand beyond about 1100\,nm (Fig.~\ref{fig:endmembers}a), so adding it lowers absorbance on average and the computed AUC is never positive. Both darker hematites fit the data, as do both seacoal stand-ins, with RMSE near \rmseOff. We adopt kerogen and hematite GDS69 ($<$10\um) as defaults.
+Table~\ref{tab:candidates} compares all stand-in combinations. The bright synthetic hematite GDS27 cannot reproduce the measured AUC increase at any particle size: its reflectance exceeds that of the sand from about 1135\,nm onward (Fig.~\ref{fig:endmembers}a), so adding it lowers absorbance on average and the computed AUC is never positive. Both darker hematites fit the data, as do both seacoal stand-ins, with RMSE near \rmseOff. We adopt kerogen and hematite GDS69 ($<$10\um) as defaults.
 
 \begin{table}[t]
 \caption{Calibration against the 24 measured AUC values for each combination of stand-in spectra: fitted effective sizes, RMSE with per-group offsets, and the maximum computed iron oxide AUC.}\label{tab:candidates}
@@ -304,7 +304,7 @@ The offsets are large: \offThree, \offSix, \offNine{} and \offTwelve{} absorbanc
 
 \subsection{Replication of laboratory trends}
 
-Table~\ref{tab:trends} summarizes the replication. The calibrated model reproduces all five trends: PC1 explains \pcScCal\% of variance for seacoal (measured 99.23\%) and \pcFeCal\% for iron oxide (measured 97.87\%), PC1 rises with both additives, and AUC rises with every additive step in every DC2 group. Uncalibrated USGS priors reproduce \trendsUsgs{} trends and linear mixing \trendsLin.
+Table~\ref{tab:trends} summarizes the replication. The calibrated model reproduces all five trends: PC1 explains \pcScCal\% of variance for seacoal (measured 99.23\%) and \pcFeCal\% for iron oxide (measured 97.87\%), PC1 rises with both additives, and AUC rises with every additive step in every DC2 group. The assumed starting sizes without calibration reproduce \trendsUsgs{} trends and linear mixing \trendsLin.
 
 \begin{table*}[t]
 \caption{Replication of the laboratory analysis on computed spectra (lab-tier noise, 50 realizations). PC1: median variance explained (\%); $\rho$: median Spearman correlation of PC1 with additive level; Mono.: share of realizations with AUC rising at every step; RMSE: computed versus measured AUC with group offsets (A$\cdot$nm). Measured values: PC1 99.23\% (seacoal) and 97.87\% (iron oxide).}\label{tab:trends}

@@ -47,11 +47,12 @@ def mixing_model_check(rules, E):
     lw = (wl >= 1600) & (wl <= 2300)
     scale = float(np.mean(mixm[lw] / q[lw]))
     qs = q * scale  # GDS76 quartz is brighter than GDS31; match its long-wavelength level
+    fh = f["hematite_mass_fraction"]
+    rho_h, rho_q = E.density["iron_oxide"], E.density["silica_sand"]  # hematite and quartz densities from the rules
     best, rmse, (grid, errs) = g.mixing.fit_grain_ratio(
-        mixm, hem, qs, f["hematite_mass_fraction"], 5.26, 2.65,
-        f["quartz_grain_um"], wl=wl, band=(1000, 2350))
-    pred_h = g.mixing.mix(np.vstack([hem, qs]), [0.02, 0.98], [5.26, 2.65], [best, f["quartz_grain_um"]])
-    pred_l = g.mixing.mix(np.vstack([hem, qs]), [0.02, 0.98], model="linear")
+        mixm, hem, qs, fh, rho_h, rho_q, f["quartz_grain_um"], wl=wl, band=tuple(rules["native_range_nm"]))
+    pred_h = g.mixing.mix(np.vstack([hem, qs]), [fh, 1 - fh], [rho_h, rho_q], [best, f["quartz_grain_um"]])
+    pred_l = g.mixing.mix(np.vstack([hem, qs]), [fh, 1 - fh], model="linear")
     pd.DataFrame({"wavelength_nm": wl, "measured_GDS76": mixm, "quartz_scaled": qs,
                   "hapke_fit": pred_h, "linear": pred_l}).to_csv(
         os.path.join(PROC, "hematite_fit.csv"), index=False, float_format="%.5f")
@@ -94,7 +95,8 @@ def save_set(folder, stem, comps, R_native, wl, ins):
     nat.to_csv(os.path.join(folder, f"{stem}_spectra_native1nm.csv.gz"), index=False,
                float_format="%.5f", compression={"method": "gzip", "mtime": 0})
     Ri = ins.resample(R_native)
-    inst = pd.DataFrame(Ri, columns=[f"R_{int(w)}" for w in ins.centers])
+    # channel centres are not whole numbers (6.93 nm spacing): label them to 0.01 nm, as in the benchmark sets
+    inst = pd.DataFrame(Ri, columns=[f"R_{w:.2f}" for w in ins.centers])
     inst.insert(0, "sample_id", ids)
     inst.to_csv(os.path.join(folder, f"{stem}_spectra_instrument.csv"), index=False, float_format="%.5f")
     return Ri

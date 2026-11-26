@@ -9,7 +9,7 @@ description = "Computed near-infrared spectra of foundry green sand and a detect
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
-authors = [{name = "Maurice Kuubata"}]
+authors = [{name = "Maurice Kuubata", email = "kuubatamaurice@gmail.com"}]
 keywords = ["near-infrared", "NIR", "green sand", "foundry", "seacoal", "chemometrics", "PLSR", "spectral library"]
 dependencies = ["numpy>=1.22", "scipy>=1.8", "pandas>=1.4", "scikit-learn>=1.1"]
 classifiers = [
@@ -21,12 +21,16 @@ classifiers = [
 [project.optional-dependencies]
 figures = ["matplotlib>=3.5"]
 test = ["pytest>=7"]
+publish = ["requests>=2.28"]
 
 [project.urls]
 Repository = "https://github.com/mauricekuubata/greensand-nir"
+Issues = "https://github.com/mauricekuubata/greensand-nir/issues"
+Leaderboard = "https://mauricekuubata.github.io/greensand-nir/leaderboard/"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]  # lets plain `pytest` run from a fresh checkout, before `pip install -e .`

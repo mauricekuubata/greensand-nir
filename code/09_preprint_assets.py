@@ -423,7 +423,7 @@ write("tab_candidates", "\n".join(
 write("tab_loo", "\n".join(rf"{r['left_out_dc2']} & {r['seacoal_um']:.1f} & {r['iron_oxide_um']:.2f} & {r['rmse']:.1f} \\" for r in loo))
 
 tr = pd.DataFrame(S["lab_trends"]["results"])
-labels = ["Calibrated (default)", "USGS priors only", "Linear mixing"]
+labels = ["Calibrated (default)", "Assumed sizes, no lab calibration", "Linear mixing"]
 write("tab_trends", "\n".join(
     rf"{lab_} & {r.PC1_seacoal_median_pct:.2f} & {r.PC1_iron_oxide_median_pct:.2f} & {r.rho_PC1_seacoal:.2f} & {r.rho_PC1_iron_oxide:.2f} & {r.AUC_monotone_share:.2f} & {r.AUC_rmse_vs_lab_with_group_offsets:.0f} & {r.T1} & {r.T2} & {r.T3} & {r.T4} & {r.T5} \\"
     for lab_, r in zip(labels, tr.itertuples())).replace("PASS", r"\cmark").replace("FAIL", r"\xmark"))
@@ -470,7 +470,7 @@ for s_, nm in (("calibrated default", "Def"), ("calibrated default, water path f
     M(f"moistSc{nm}", g_(sm[(sm.scenario == s_) & (sm.target == "seacoal")].PLSR_detection_limit_pct.iloc[0]))
     M(f"moistFe{nm}", g_(sm[(sm.scenario == s_) & (sm.target == "iron_oxide")].PLSR_detection_limit_pct.iloc[0]))
 for s_, nm in (("linear mixing", "Lin"), ("seacoal = carbon black", "Cb"), ("clay = calcium montmorillonite SAz-1", "Saz"),
-               ("clay grain 30 um", "Clay"), ("instrument FWHM 25 nm", "Fwhm"), ("USGS priors (no lab calibration)", "Usgs")):
+               ("clay grain 30 um", "Clay"), ("instrument FWHM 25 nm", "Fwhm"), ("assumed sizes (no lab calibration)", "Usgs")):
     M(f"sensSc{nm}", g_(sd[(sd.scenario == s_) & (sd.target == "seacoal")].PLSR_detection_limit_pct.iloc[0]))
     M(f"sensFe{nm}", g_(sd[(sd.scenario == s_) & (sd.target == "iron_oxide")].PLSR_detection_limit_pct.iloc[0]))
 
