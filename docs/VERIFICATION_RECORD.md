@@ -17,3 +17,8 @@
 - **Code:** numpy < 2.0 compatibility, token masking in `tools/publish_github.py`, Zenodo record-file support in `tools/zenodo_deposit.py`, input checks in `code/score_submission.py`, deterministic release archives, 3 new tests (22 total, all passing).
 - **Author's decisions:** the author received the list of corrections on 2026-11-20 and on 2026-11-26 asked for them to be pushed. He chose the JOSS paper's AI-use statement ("Claude (Anthropic)", no version) and funding statement ("This work received no specific funding.").
 - **Mechanical gate:** passed on 2026-11-26.
+
+## Zenodo archive (2026-11-26)
+
+- **Change to decision D9:** instead of four separate Zenodo records, the author chose to archive the whole repository as one record through the GitHub-Zenodo integration.
+- **Record:** GitHub release v1.0.0 (commit 5abd4bc), Zenodo DOI 10.5281/zenodo.24568108 (concept DOI 10.5281/zenodo.24568107), resource type dataset, CC BY 4.0 (code MIT, stated in the record description), published 2026-11-26.

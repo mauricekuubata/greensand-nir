@@ -1,6 +1,3 @@
 date,artifact_or_event,type,venue_or_host,link_or_doi,status,prong_tags,metrics_snapshot,files_saved,notes
-YYYY-MM-DD,Green Sand NIR Library v1.0.0,dataset,Zenodo + GitHub,pending,not yet published,,0 downloads at release,zenodo_record.pdf,fill on release day
-YYYY-MM-DD,Green Sand NIR Detection-Limit Benchmark v1.0.0,dataset,Zenodo + GitHub Pages,pending,not yet published,,,,
-YYYY-MM-DD,Green Sand NIR Moisture Extension v1.0.0,dataset,Zenodo,pending,not yet published,,,,
-YYYY-MM-DD,greensand-nir Python package v1.0.0,software,Zenodo + GitHub (+PyPI),pending,not yet published,,,,
+2026-11-26,"Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark v1.0.0 (library, benchmark, moisture extension, package, preprint source)",dataset,Zenodo (via GitHub release v1.0.0),https://doi.org/10.5281/zenodo.24568108,published,,0 downloads at release,zenodo_record.pdf,"one record for the whole repository; concept DOI 10.5281/zenodo.24568107; GitHub release https://github.com/mauricekuubata/greensand-nir/releases/tag/v1.0.0"
 YYYY-MM-DD,Preprint: Open Near-Infrared Reference Library and Detection-Limit Benchmark for Seacoal and Red Iron Oxide in Foundry Green Sand,preprint,engrXiv or arXiv,pending,not yet posted,,,main.pdf,fill on posting day

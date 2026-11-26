@@ -1,6 +1,6 @@
 # Green Sand Near-Infrared Reference Library
 
-**Status:** Released v1.0.0 | **Maintainer:** Maurice Kuubata, [ORCID 0009-0003-3178-5971](https://orcid.org/0009-0003-3178-5971) | **License:** code MIT, data CC BY 4.0 | **DOI:** pending
+**Status:** Released v1.0.0 | **Maintainer:** Maurice Kuubata, [ORCID 0009-0003-3178-5971](https://orcid.org/0009-0003-3178-5971) | **License:** code MIT, data CC BY 4.0 | **DOI:** [10.5281/zenodo.24568108](https://doi.org/10.5281/zenodo.24568108) (all versions: [10.5281/zenodo.24568107](https://doi.org/10.5281/zenodo.24568107))
 
 **In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but there is no public, shared reference for which additive levels such a sensor can reliably detect. This project provides an open set of 4,410 computed green sand spectra (plus 6,930 moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
 
@@ -86,7 +86,7 @@ Read [docs/LIMITATIONS.md](docs/LIMITATIONS.md) before using or citing anything 
 
 ## Citation
 
-See `CITATION.cff`. Kuubata, M. (2026). Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark (v1.0.0). Zenodo. DOI pending.
+See `CITATION.cff`. Kuubata, M. (2026). Green Sand Near-Infrared Reference Library and Detection-Limit Benchmark (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.24568108
 
 ## How this was built
 

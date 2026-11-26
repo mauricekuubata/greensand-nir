@@ -25,6 +25,8 @@ from greensand_nir.compositions import ORDER  # noqa: E402
 REPO = "greensand-nir"
 GH_USER = "mauricekuubata"
 VERSION = "1.0.0"
+DOI = "10.5281/zenodo.24568108"          # v1.0.0 record, from the GitHub release (2026-11-26)
+CONCEPT_DOI = "10.5281/zenodo.24568107"  # always resolves to the newest version
 
 
 def w(path, text):
@@ -83,7 +85,7 @@ def main():
     inst_first = f"R_{ins['start_nm']:.2f}"
     tiers = rules["noise_tiers"]
     cite = (f"{au['family']}, {au['given'][0]}. (2026). Green Sand Near-Infrared Reference Library and "
-            f"Detection-Limit Benchmark (v{VERSION}). Zenodo. DOI pending.")
+            f"Detection-Limit Benchmark (v{VERSION}). Zenodo. https://doi.org/{DOI}")
 
     # worked example at 1700 nm for spot row 3
     E = g.io.load_endmembers(rules, os.path.join(ROOT, "data", "raw", "splib07_selected"))
@@ -104,7 +106,7 @@ def main():
     w("README.md", f"""
 # Green Sand Near-Infrared Reference Library
 
-**Status:** {status} | **Maintainer:** {au['name']}, [ORCID {au['orcid']}](https://orcid.org/{au['orcid']}) | **License:** code MIT, data CC BY 4.0 | **DOI:** pending
+**Status:** {status} | **Maintainer:** {au['name']}, [ORCID {au['orcid']}](https://orcid.org/{au['orcid']}) | **License:** code MIT, data CC BY 4.0 | **DOI:** [{DOI}](https://doi.org/{DOI}) (all versions: [{CONCEPT_DOI}](https://doi.org/{CONCEPT_DOI}))
 
 {draft}**In plain terms:** foundries still check their sand with slow tests like loss on ignition, so a bad batch can reach the mold line before the result comes back. Near-infrared (NIR) sensors could check sand in seconds, but there is no public, shared reference for which additive levels such a sensor can reliably detect. This project provides an open set of {L['n_dry']:,} computed green sand spectra (plus {L['n_moist']:,} moist-sand spectra), a fixed test that measures the smallest amount of seacoal or red iron oxide a method can detect, and a Python package to reproduce and extend all of it.
 
@@ -528,6 +530,7 @@ authors:
     orcid: "https://orcid.org/{au['orcid']}"
     affiliation: "{au['affiliation']}"
 license: CC-BY-4.0
+doi: "{DOI}"
 repository-code: "https://github.com/{GH_USER}/{REPO}"
 keywords:
   - near-infrared spectroscopy
